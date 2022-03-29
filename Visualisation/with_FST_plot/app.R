@@ -983,15 +983,14 @@ server <- function(input, output, session) {
     plot_ly(ps_data_pca(), x = ~`C1`, y = ~`C2`, color = ~`ClusterNo`, size = ~`ps`,
       type = "scatter", mode = "markers",
       colors = psa_pl_col, sizes = c(7,21),
-      marker = list(symbol = "circle", sizemode = "markers", opacity = 0.7),
       textposition = "auto",
       hoverinfo = "text",
       hovertext = ~paste(sep='',
         "Sample ID: ", `SampleId`,
         "<br>Component: ", round(`C1`,3),
         "<br>Component: ", round(`C2`,3),
-        "<br>Cluster/Group No: ", `ClusterNo`)
-       ) %>%
+        "<br>Cluster/Group No: ", `ClusterNo`)) %>%
+    add_markers(marker = list(symbol = "circle", sizemode = "markers", opacity = 0.7)) %>%
     layout(paper_bgcolor = "#FFE4E1", plot_bgcolor = "#FFFFFF", title = list(text = vals$title_str, font = list(family = "sans serif", size = 20, color = "#C71585")),
       font = list(family = "sans serif", size = 14, color = "#4B0082"), margin = 1, hovermode = "closest", hoverdistance = 1,
       xaxis = list(title = vals_pca_pl$xtitle, range = c(vals2$xmin, vals2$xmax), showgrid = TRUE, gridwith = 1, zerolinewidth = 1, ticklen = 5),
