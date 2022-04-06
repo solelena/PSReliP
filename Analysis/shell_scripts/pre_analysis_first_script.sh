@@ -15,6 +15,7 @@ echo "WD=$WD" >&2
 BED_INPUT_FILE=${WD}/bed_files/plink_input_data
 
 echo "MAX_MEM_USAGE=$MAX_MEM_USAGE" >&2
+echo "MAX_THREADS=$MAX_THREADS" >&2
 
 if [ -d "${WD}"/bed_files/ ]
 then
@@ -26,16 +27,16 @@ fi
 
 if [ "${VCF_FILE_NAME##*.}" = "bcf" ]
 then
-  "${PLINK2_DEV_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_DEV_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [[ $VCF_FILE_NAME =~ \bcf.gz$ ]]
 then
-  "${PLINK2_DEV_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_DEV_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [ "${VCF_FILE_NAME##*.}" = "vcf" ]
 then
-  "${PLINK2_DEV_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_DEV_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [[ $VCF_FILE_NAME =~ \vcf.gz$ ]]
 then
-  "${PLINK2_DEV_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_DEV_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 else
     echo "Please specify the valid VCF file in configuration file."
 fi
@@ -46,4 +47,4 @@ mv "${BED_INPUT_FILE}"_temp.psam "${BED_INPUT_FILE}".psam
 
 rm -f "${BED_INPUT_FILE}"_temp.pvar
 
-"${PLINK2_DEV_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --freq counts --memory "$MAX_MEM_USAGE" --out "${BED_INPUT_FILE}"_frc
+"${PLINK2_DEV_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --freq counts --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_frc
