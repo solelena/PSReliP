@@ -1192,8 +1192,8 @@ server <- function(input, output, session) {
       grid_size = 0.1,
       titleX = TRUE,
       hide_colorbar = FALSE,
-      fontsize_row = 5,
-      fontsize_col = 5,
+      fontsize_row = 4,
+      fontsize_col = 4,
       labCol = ksh_lab_col(),
       labRow = ksh_lab_row(),
       heatmap_layers = NULL) %>%
