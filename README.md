@@ -43,9 +43,14 @@ The integrated pipeline for analysis and visualization of population structure a
 ## Installation
 - Install PLINK (1.9 and 2.0) in UNIX/Linux based OS.
 - Create a directory in your home directory you would like to install the PSReliP pipeline.
-- Copy the pipeline directory containing the shell scripts, configuration file, Perl programs, and Shiny app.R files to the directory you created.
+- Copy the PSReliP pipeline package containing the shell scripts, configuration file, Perl programs, and Shiny app.R files into
+-  the directory you created.
 - Edit the [configuration file](./Analysis/psrelip.config) and specify the path to the PLINK executables (1.9 and 2.0), the pipeline installation directory, the working directory, the input files and the parameter values used in the analysis and visualization processes.
-- Install PLINK (1.9 and 2.0) and the necessary R libraries in UNIX/Linux based OS.
+- Install the necessary R packages in a UNIX/Linux-based OS if you want to run the Shiny app on a [Shiny Server](https://github.com/rstudio/shiny-server), or in RStudio if you want to run the Shiny app in a desktop version of [RStudio](https://www.rstudio.com/products/rstudio/).
 
+## Version Requirements
+- PLINK 1.9: 19 Oct 2020 or later.
+- PLINK 2.0: Development (8 Jun 2021) or later.
+- R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), DT (0.16+)
 ## Getting Started
 
