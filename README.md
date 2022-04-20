@@ -50,6 +50,7 @@ The integrated pipeline for analysis and visualization of population structure a
 ## Version Requirements
 - PLINK 1.9: 19 Oct 2020 or later.
 - PLINK 2.0: Development (8 Jun 2021) or later.
-- R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), DT (0.16+)
+- R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
+
 ## Getting Started
 
