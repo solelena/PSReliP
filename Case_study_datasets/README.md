@@ -8,7 +8,18 @@
   The parameter sets and parameter values used in this pipeline run are listed in [rapdb_30depth_5gr_ld_pr.config](./rapdb_30depth_5gr_ld_pr.config), which is the PSReliP pipeline configuration file.
 #### Folder contents
   The Shiny application folder [rapdb_30depth_5gr_ld_pr](./rapdb_30depth_5gr_ld_pr) contains an app.R file and a 'data' subfolder with the analysis results files.
-#### Viewing the shiny app
+#### Viewing the Shiny app
   Download the Shiny app folder. To run the Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The app will open up in a new window.
 #### User interface
-  The screenshots of the user interface of this Shiny app can be found in the [Images](../Images/case_study_UI_screenshots) folder.
+  The screenshots of the user interface of this Shiny app can be found in the [Images](../Images/case_study_UI_screenshots) folder.<br>
+  The Shiny app created by our pipeline contains four tabs corresponding to the types of analysis performed in it. These tabs are as follows: 1) ‘Basic statistics’; 2) ‘Population Stratification analysis’; 3) ‘Wright's FST estimation’; 4) ‘IBS and GRM calculation & Kinship Coefficients estimation’.<br>
+  On the opening page, the first tab "Basic statistics" displays the 'Sample variant-count report' in a tabular format. <br>
+
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_table.png" width=80% height=80%>
+  
+  By selecting "Chart" in the radio button labeled "Views", users can display this report as a stacked bar chart.<br>
+  
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_chart.png" width=80% height=80%>
+
+  
+  
