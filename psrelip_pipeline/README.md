@@ -1,6 +1,8 @@
 ## PSReliP pipeline
-***PSReliP pipeline folder containing shell scripts, the configuration file, Perl programs, and Shiny app.R files***
-### List of parameters used in the pipeline configuration file
+**PSReliP pipeline folder containing all necessary files for executing the pipeline**<br>
+  The PSReliP pipeline folder contains the shell scripts (pre_analysis_first_script.sh, analysis_second_script.sh), the pipeline configuration file (psrelip.config), as well as Perl programs and Shiny app.R files inside the program_files folder.
+### The pipeline configuration file
+#### List of parameters used in the PSReliP pipeline
 | Parameters | Parameters description | Details | Possible values of parameters | Default values in the pipeline | Required/Optional/Ignored |
 | --- | --- | --- | --- | --- | --- |
 | PLINK_HOME | Path to the PLINK executable files | Specify the full path to the executable of PLINK 1.9 (plink_linux_x86_64_20201019.zip<sup>a</sup>). | not empty string | there is no default value | required |
@@ -8,9 +10,9 @@
 | TOOL_INSTALL_DIR | Installation Directory | Specify the path to the directory where you installed the tool. | not empty string | there is no default value | required |
 | WD | Working Directory | Specify the path to the directory where the analysis results and log files will be saved. | not empty string | there is no default value | required |
 | VCF_FILE_NAME | Path to the genotype input file | Specify the path to the genotype input file in '.vcf/.vcf.gz/.bcf/.bcf.gz' formats. | not empty string | there is no default value | required |
-| SAMPLES_ID_FOR_ANA | Path to the file that lists the samples	Specify the path to the file with the list of IDs, names, and groups of samples that you want to include in the analysis.	string	empty string by default	optional; ignored if $SAM_SELECT_FLAG is equal to 0 and $SAM_ANOTHER_NAME_FLAG is equal to 0 and $CLUSTERING_FLAG is equal to 1 |
-| SHINY_APP_DIR	Path to the output directory for the Shiny application	Specify the path to the directory where the Shiny application will be saved.	not empty string	there is no default value	required |
-| EXTRA_CHR_FLAG	Flag to allow unrecognized chromosome codes (PLINK's --allow-extra-chr flag)	The flag that allows the user to refer to extra chromosome codes by name.	integer 0 or 1 (--allow-extra-chr flag is used)	default value: 1	required |
+| SAMPLES_ID_FOR_ANA | Path to the file that lists the samples | Specify the path to the file with the list of IDs, names, and groups of samples that you want to include in the analysis. | string | empty string by default | optional; ignored if $SAM_SELECT_FLAG is equal to 0 and $SAM_ANOTHER_NAME_FLAG is equal to 0 and $CLUSTERING_FLAG is equal to 1 |
+| SHINY_APP_DIR | Path to the output directory for the Shiny application | Specify the path to the directory where the Shiny application will be saved. | not empty string | there is no default value | required |
+| EXTRA_CHR_FLAG | Flag to allow unrecognized chromosome codes (PLINK's --allow-extra-chr flag) | The flag that allows the user to refer to extra chromosome codes by name. | integer 0 or 1 (--allow-extra-chr flag is used) | default value: 1 | required |
 | NUMBER_OF_CHROMOSOMES	Number of chromosomes	Specify the number of chromosomes that you want included in the analysis.	non negative integer	default value: 0	optional if $EXTRA_CHR_FLAG is equal to 0; ignored if $EXTRA_CHR_FLAG is equal to 1 |
 | SNP_ONLY_FLAG	Keep only SNPs (PLINK's --snps-only flag)	--snps-only' excludes all variants with one or more multi-character allele codes.b	integer 0 or 1 (--snps-only flag is used)	default value: 0	required |
 | GENO_VAL	Missing genotype rates (PLINK's --geno [maximum per-variant]) 	--geno' filters out all variants with missing call rates exceeding the provided value (default 0.1) to be removed.b	decimal numbers from 0 to 1 (in PLINK 2.0 the default is 0.1)	default value: 0.2	required |
@@ -32,7 +34,7 @@
 | MAX_THREADS	System resource usage (PLINK's  --threads flag)	Set maximum number of compute threads.c (depends on your machine)	non negative integer	default value: 8	required |
 
 **Note:** <sup>a</sup> represents the version of the PLINK executable used in our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
-### Implementation of PSRelIP
+### Implementation of the PSReliP pipeline
 Note that ($) is used to denote variables with values defined in the configuration file (Supplementary Table 1) and in the corresponding shell script.
 In the PSRelIP pipeline, in all PLINK command lines the --memory $MAX_MEM_USAGE and –threads $MAX_THREADS flags are used.
 First shell script:
