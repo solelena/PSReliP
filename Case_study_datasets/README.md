@@ -7,6 +7,6 @@
 #### Used parameter values
   The parameter sets and parameter values used in this pipeline run are listed in [rapdb_30depth_5gr_ld_pr.config](./rapdb_30depth_5gr_ld_pr.config), which is the PSReliP pipeline configuration file.
 #### Folder contents
-  The Shiny application folder contains an app.R file and a 'data' subfolder with the analysis results files.
+  The Shiny application folder [rapdb_30depth_5gr_ld_pr](./rapdb_30depth_5gr_ld_pr) contains an app.R file and a 'data' subfolder with the analysis results files.
 #### Viewing the shiny app
   Download the Shiny app folder. To run the Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The app will open up in a new window.
