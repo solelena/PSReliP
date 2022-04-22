@@ -10,3 +10,5 @@
   The Shiny application folder [rapdb_30depth_5gr_ld_pr](./rapdb_30depth_5gr_ld_pr) contains an app.R file and a 'data' subfolder with the analysis results files.
 #### Viewing the shiny app
   Download the Shiny app folder. To run the Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The app will open up in a new window.
+#### User interface
+  The screenshots of the user interface of this Shiny app can be found in the [Images](./Images/case_study_UI_screenshots) folder.
