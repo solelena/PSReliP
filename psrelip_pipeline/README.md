@@ -33,60 +33,61 @@
 | MAX_MEM_USAGE | System resource usage (PLINK's --memory flag) | Set size, in MB, of initial workspace malloc attempt.<sup>c</sup> 32-bit PLINK limits workspace size to roughly 2 GB.<sup>d</sup> | non negative integer | default value: 2000 | required |
 | MAX_THREADS | System resource usage (PLINK's  --threads flag) | Set maximum number of compute threads.<sup>c</sup> (depends on your machine) | non negative integer | default value: 8 | required |
 
-**Note:** <sup>a</sup> represents the version of the PLINK executable used in our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
+**Note:** <sup>a</sup> represents the version of the PLINK executable file required for our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
 ### Implementation of the PSReliP pipeline
-Note that ($) is used to denote variables with values defined in the configuration file (Supplementary Table 1) and in the corresponding shell script.
-In the PSRelIP pipeline, in all PLINK command lines the --memory $MAX_MEM_USAGE and –threads $MAX_THREADS flags are used.
-First shell script:
-The PLINK command lines to convert VCF/BCF to PLINK format (PLINK 2 binary fileset will be created):
-plink2 --vcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen --out binary_fileset
-plink2 --bcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen –out binary_fileset
-The PLINK command line to generate an allele count report, which is a valid input for --read-freq:
-plink2 --pfile binary_fileset --allow-extra-chr --freq counts --out plink2.acount
-In addition to the PLINK commands, in-house Perl program is used to create identifiers for all variants in the binary_fileset.pvar file.
-Second shell script:
-The PLINK command lines for input filtering:
-of samples:
---keep samples.list
---mind $MIND_VAL
-of variants:
---chr $RANGE_OF_CHROMOSOMES
---snps-only
---geno $GENO_VAL
---maf $MAF_VAL
-The PLINK command lines for basic statistics calculation:
-of original dataset and filtered and LD pruned dataset:
---sample-counts
---missing sample-only
-of filtered and LD pruned dataset:
---het 'cols=+het,+het'
---ibc
-The PLINK command lines for LD-based variant pruning (a pruned subset of variants will be written to plink2.prune.in, which is valid input for --extract):
-window size in kilobase:
---indep-pairwise $LD_WINDOW_SIZE $LD_WINDOW_SIZE_UNITS 1 $LD_THRESHOLD
-window size in variant count:
---indep-pairwise $LD_WINDOW_SIZE $LD_STEP_SIZE $LD_THRESHOLD
-for excluding all unlisted variants from the current analysis:
---extract plink2.prune.in
-The PLINK command line for clustering calculations and multidimensional scaling (MDS) report generation (PLINK 1.9):
---cluster --K $GROUPS_NO --mds-plot 10
-The PLINK command lines for top 10 principal components (PCs) extraction:
---read-freq plink2.acount --pca
-with the 'meanimpute' modifier to request mean-imputes missing genotype calls:
---read-freq plink2.acount --pca meanimpute
-The PLINK command lines for FST (Pairwise fixation index) estimation between pairs of subpopulations defined as a categorical phenotype:
---fst CATEGORY --pheno groups.list
-with the 'report-variants' modifier to request per-variant FST estimates:
---fst CATEGORY 'report-variants' --pheno groups.list
-The PLINK command line for IBS (identity-by-state) matrix calculation (PLINK 1.9):
---distance square ibs
-The PLINK command lines for relationship matrix computation:
---read-freq plink2.acount --make-rel square
-with the 'meanimpute' modifier to request mean-imputes missing genotype calls:
---read-freq plink2.acount --make-rel meanimpute square
-The PLINK command line for KING kinship coefficients computation:
---make-king square
-In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purpose, for pipelining, and some other purposes.
+**Note** that **($)** is used to denote variables with values defined in the configuration file (psrelip.config) (Supplementary Table 1) and in the corresponding shell script.
+* The PSRelIP pipeline uses the following flags in all PLINK command lines:
+> --memory $MAX_MEM_USAGE --threads $MAX_THREADS
+#### First shell script:
+* The PLINK command lines to convert VCF/BCF to PLINK format (PLINK 2 binary fileset will be created):
+> plink2 --vcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen --out binary_fileset<br>
+> plink2 --bcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen –out binary_fileset<br>
+* The PLINK command line to generate an allele count report, which is a valid input for --read-freq:
+> plink2 --pfile binary_fileset --allow-extra-chr --freq counts --out plink2.acount <br>
+* In addition to the PLINK commands, in-house Perl program is used to create identifiers for all variants in the binary_fileset.pvar file.
+#### Second shell script:
+* The PLINK command lines for input filtering:
+> **of samples:**<br>
+> --keep samples.list<br>
+> --mind $MIND_VAL<br>
+> **of variants:**<br>
+> --chr $RANGE_OF_CHROMOSOMES<br>
+> --snps-only<br>
+> --geno $GENO_VAL<br>
+> --maf $MAF_VAL<br>
+* The PLINK command lines for basic statistics calculation:
+> **of original dataset and filtered and LD pruned dataset:**<br>
+> --sample-counts<br>
+> --missing sample-only<br>
+> **of filtered and LD pruned dataset:**<br>
+> --het 'cols=+het,+het'<br>
+> --ibc<br>
+* The PLINK command lines for LD-based variant pruning (a pruned subset of variants will be written to plink2.prune.in, which is valid input for --extract):
+> **window size in kilobase:**<br>
+> --indep-pairwise $LD_WINDOW_SIZE $LD_WINDOW_SIZE_UNITS 1 $LD_THRESHOLD<br>
+> **window size in variant count:**<br>
+> --indep-pairwise $LD_WINDOW_SIZE $LD_STEP_SIZE $LD_THRESHOLD<br>
+> **for excluding all unlisted variants from the current analysis:**<br>
+> --extract plink2.prune.in<br>
+* The PLINK command line for clustering calculations and multidimensional scaling (MDS) report generation (PLINK 1.9):
+> --cluster --K $GROUPS_NO --mds-plot 10<br>
+* The PLINK command lines for top 10 principal components (PCs) extraction:
+> --read-freq plink2.acount --pca<br>
+> **with the 'meanimpute' modifier to request mean-imputes missing genotype calls:**<br>
+>--read-freq plink2.acount --pca meanimpute
+* The PLINK command lines for FST (Pairwise fixation index) estimation between pairs of subpopulations defined as a categorical phenotype:
+> --fst CATEGORY --pheno groups.list<br>
+> **with the 'report-variants' modifier to request per-variant FST estimates:**<br>
+> --fst CATEGORY 'report-variants' --pheno groups.list
+* The PLINK command line for IBS (identity-by-state) matrix calculation (PLINK 1.9):
+> --distance square ibs<br>
+* The PLINK command lines for relationship matrix computation:
+> --read-freq plink2.acount --make-rel square<br>
+> **with the 'meanimpute' modifier to request mean-imputes missing genotype calls:**<br>
+> --read-freq plink2.acount --make-rel meanimpute square
+* The PLINK command line for KING kinship coefficients computation:
+> --make-king square<br>
+* In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purpose, for pipelining, and some other purposes.
 
   
   
