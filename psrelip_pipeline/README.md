@@ -1,6 +1,6 @@
 ## PSReliP pipeline
 **PSReliP pipeline folder containing all necessary files for executing the pipeline**<br>
-  The PSReliP pipeline folder contains the shell scripts (pre_analysis_first_script.sh, analysis_second_script.sh), the pipeline configuration file (psrelip.config), as well as Perl programs and Shiny app.R files inside the program_files folder.
+  The PSReliP pipeline folder contains the shell scripts ([pre_analysis_first_script.sh](./pre_analysis_first_script.sh), [analysis_second_script.sh](./analysis_second_script.sh)), the pipeline configuration file [(psrelip.config)](./psrelip.config), as well as [Perl programs](./program_files/perl_programs) and [Shiny app.R](./program_files/shiny_programs) files inside the program_files folder.
 ### The pipeline configuration file
 #### List of parameters used in the PSReliP pipeline
 | Parameters | Parameters description | Details | Possible values of parameters | Default values in the pipeline | Required/Optional/Ignored |
@@ -35,7 +35,7 @@
 
 **Note:** <sup>a</sup> represents the version of the PLINK executable file required for our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
 ### Implementation of the PSReliP pipeline
-**Note** that **($)** is used to denote variables with values defined in the configuration file (psrelip.config) (Supplementary Table 1) and in the corresponding shell script.
+**Note** that **($)** is used to denote variables with values defined in the configuration file [(psrelip.config)](./psrelip.config) (also see the details in the table above) and in the corresponding shell script.
 * The PSRelIP pipeline uses the following flags in all PLINK command lines:
 > --memory $MAX_MEM_USAGE --threads $MAX_THREADS
 #### First shell script:
@@ -88,8 +88,18 @@
 * The PLINK command line for KING kinship coefficients computation:
 > --make-king square<br>
 * In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purpose, for pipelining, and some other purposes.
+### The parameter values used, the number of samples and variants, and the required time (first shell script) for the [case study dataset](../Case_study_datasets).
+  Used parameter values, number of samples and variants, and required time (first shell script)
+| Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup>  | Max alleles | Number of samples | Number of loaded variants | Number of filtered variants |
+| --- | --- | --- | --- | --- | --- | --- |
+| Rice Dataset | 99s | 376s | 2 | 143 | 35,568,995 | 30,904,333 |
 
-  
-  
+**Note:** <sup>a</sup> “By default, multithreaded PLINK functions employ about as many CPU-intensive threads as your system has available logical cores [(--threads)](https://www.cog-genomics.org/plink/2.0/other#threads)”. <sup>b</sup> “When memory is moderately constrained, a reasonable guideline is to reserve 8000 MiB when working with datasets containing up to 50 million variants, and to add another 1000 MiB for every 10 million variants past that [(--memory)](https://www.cog-genomics.org/plink/2.0/other#memory)”. In the PSRelIP pipeline, the -threads and --memory flags are used in all PLINK command lines, and the values of these parameters can be specified in the configuration file [(psrelip.config)](./psrelip.config)
+### The parameter values used, the number of samples and variants, and the required time (second shell script) for the [case study dataset](../Case_study_datasets).
+| Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup> | Types of variants | Geno<sup>c</sup> | Mind<sup>c</sup> | Maf<sup>c</sup> | Meanimpute<sup>c</sup> | Clustering<sup>c</sup> | Number of groups<sup>c</sup> | window size<sup>d</sup> | vc or kb<sup>d</sup> | step size<sup>d</sup> | r2 threshold<sup>d</sup> | Samples | Loaded variants | Filtered variants | Filtered and pruned variants |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Rice Dataset | 94s | 81s | SNPs and InDels | 0.2 | 0.2 | 0.05 |	⃝ | × | 5 | 100 | kb | 1 | 0.2 | 110 | 30,904,333 | 4,449,631 | 33,539 |
+
+**Note:** <sup>a</sup> and <sup>b</sup> in the column headings are the same notes as in the table above; <sup>c</sup> setting parameters; <sup>d</sup> setting parameters (LD-based pruning).
   
   
