@@ -96,7 +96,7 @@
   Used parameter values, number of samples and variants, and required time (first shell script)
 | Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup>  | Max alleles | Number of samples | Number of loaded variants | Number of filtered variants |
 | --- | --- | --- | --- | --- | --- | --- |
-| Rice Dataset | 99s | 376s | 2 | 143 | 35,568,995 | 30,904,333 |
+| Rice Dataset | 599s | 376s | 2 | 143 | 35,568,995 | 30,904,333 |
 
 **Note:** <sup>a</sup> “By default, multithreaded PLINK functions employ about as many CPU-intensive threads as your system has available logical cores [(--threads)](https://www.cog-genomics.org/plink/2.0/other#threads)”. <sup>b</sup> “When memory is moderately constrained, a reasonable guideline is to reserve 8000 MiB when working with datasets containing up to 50 million variants, and to add another 1000 MiB for every 10 million variants past that [(--memory)](https://www.cog-genomics.org/plink/2.0/other#memory)”. In the PSRelIP pipeline, the -threads and --memory flags are used in all PLINK command lines, and the values of these parameters can be specified in the configuration file [(psrelip.config)](./psrelip.config)
 ### The parameter values used, the number of samples and variants, and the required time (second shell script) for the [case study dataset](../Case_study_datasets).
