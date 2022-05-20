@@ -61,7 +61,7 @@ unique_groups <- dplyr::distinct(as.data.frame(gr_list))
 fst_vals <- read.table(file = "data/results_data.fst.summary", header = FALSE)
 fst_contigs_data <- read.table(file = "data/chr_used_fstplot.txt", header = FALSE)
 fst_contigs_list <- c()
-if (length(as.vector(as.character(fst_contigs_data[,1]))) <= 50  && sum(as.vector(as.numeric(fst_contigs_data[,2]))) <= 100000) {
+if (length(as.vector(as.character(fst_contigs_data[,1]))) > 1 && length(as.vector(as.character(fst_contigs_data[,1]))) <= 50  && sum(as.vector(as.numeric(fst_contigs_data[,2]))) <= 100000) {
   fst_contigs_list <- c("ALL", as.character(fst_contigs_data[,1]))
 } else {
   fst_contigs_list <- c(as.character(fst_contigs_data[,1]))
