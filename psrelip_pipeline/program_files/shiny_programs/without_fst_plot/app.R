@@ -36,7 +36,7 @@ if (u_parameters[1,13] == 1) {
   smp_fn <- "data/plink_samples_info.fam"
 }
 smp_orig <- read.table(file = smp_fn_orig, header = FALSE)
-cult_orig_number <- nrow(smp_orig)
+smps_orig_number <- nrow(smp_orig)
 smp <- read.table(file = smp_fn, header = FALSE)
 smps_number <- nrow(smp)
 
@@ -309,8 +309,8 @@ ui <- fluidPage(
       span(id = "param_title", "Input filtering performed by PLINK 2.0"),
       fluidRow(
         column(6,
-          span("Number of analyzed samples: "),
-          span(id = "param_val", u_parameters[1,14])
+          span("Number of loaded samples: "),
+          span(id = "param_val", smps_orig_number)
         ),
         column(6,
           span("Number of loaded variants: "),
@@ -319,9 +319,15 @@ ui <- fluidPage(
       ),
       fluidRow(
         column(6,
+          span("Samples remaining after filtering: "),
+          span(id = "param_val", u_parameters[1,14])
+        ),
+        column(6,
           span("Variants remaining after filtering: "),
           span(id = "param_val", u_parameters[1,16])
-        ),
+        )
+      ),
+      fluidRow(
         column(6,
           span(remaining_var_lab),
           span(id = "param_val", remaining_var_val)
@@ -717,7 +723,7 @@ server <- function(input, output, session) {
 
   output$variants_number <- renderText({
     if (input$dataset_type == "Original") {
-      sprintf("Number of variants used in analysis (total number of variants observed in samples): %s; Number of analyzed samples: %s", u_parameters[1,15], cult_orig_number)
+      sprintf("Number of variants used in analysis (total number of variants observed in samples): %s; Number of analyzed samples: %s", u_parameters[1,15], smps_orig_number)
     } else if (input$dataset_type == "After filtering") {
       if (input$bs_reports == "Sample variant-count report" || input$bs_reports == "Sample-based missing data report") {
         sprintf("Number of variants used in analysis (remained after filtering): %s; Number of analyzed samples: %s", u_parameters[1,16], smps_number)
