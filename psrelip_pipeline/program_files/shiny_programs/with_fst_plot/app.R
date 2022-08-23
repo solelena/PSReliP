@@ -303,8 +303,8 @@ ui <- fluidPage(
       span(id = "param_title", "Input filtering performed by PLINK 2.0"),
       fluidRow(
         column(6,
-          span("Number of analyzed samples: "),
-          span(id = "param_val", u_parameters[1,14])
+          span("Number of loaded samples: "),
+          span(id = "param_val", smps_orig_number)
         ),
         column(6,
           span("Number of loaded variants: "),
@@ -313,9 +313,15 @@ ui <- fluidPage(
       ),
       fluidRow(
         column(6,
+          span("Samples remaining after filtering: "),
+          span(id = "param_val", u_parameters[1,14])
+        ),
+        column(6,
           span("Variants remaining after filtering: "),
           span(id = "param_val", u_parameters[1,16])
-        ),
+        )
+      ),
+      fluidRow(
         column(6,
           span(remaining_var_lab),
           span(id = "param_val", remaining_var_val)
