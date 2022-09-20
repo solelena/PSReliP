@@ -39,16 +39,15 @@
 
 **Note:** <sup>a</sup> represents the version of the PLINK executable file required for our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
 ### Implementation of the PSReliP pipeline
-**Note** that **($)** is used to denote variables with values defined in the configuration file [(psrelip.config)](./psrelip.config) (also see the details in the table above) and in the corresponding shell script.
-* The PSRelIP pipeline uses the following flags in all PLINK command lines:
-> --memory $MAX_MEM_USAGE --threads $MAX_THREADS
+**Note** that **($)** denotes variables with values defined in the configuration file [(psrelip.config)](./psrelip.config) (also see the details in the table above) and corresponding shell script.
+* In the PSRelIP pipeline, in all PLINK command lines, the --memory $MAX_MEM_USAGE and --threads $MAX_THREADS flags are used:
 #### First shell script:
 * The PLINK command lines to convert VCF/BCF to PLINK format (PLINK 2 binary fileset will be created):
 > plink2 --vcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen --out binary_fileset<br>
 > plink2 --bcf $VCF_FILE_NAME --allow-extra-chr --max-alleles 2 --make-pgen –out binary_fileset<br>
 * The PLINK command line to generate an allele count report, which is a valid input for --read-freq:
 > plink2 --pfile binary_fileset --allow-extra-chr --freq counts --out plink2.acount <br>
-* In addition to the PLINK commands, in-house Perl program is used to create identifiers for all variants in the binary_fileset.pvar file.
+* In addition to the PLINK commands, an in-house Perl program is used to create identifiers for all the variants in the binary_fileset.pvar file.
 #### Second shell script:
 * The PLINK command lines for input filtering:
 > **of samples:**<br>
