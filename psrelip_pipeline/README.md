@@ -92,14 +92,13 @@
 > --make-king square<br>
 * In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purposes, pipelining, and other purposes.
 ### Parameter values, the number of samples and variants, and the required time (first shell script) for the [case study dataset](../Case_study_datasets).
-  Parameter values, the number of samples and variants, and the required time (first shell script)
-| Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup>  | Max alleles | Number of samples | Number of loaded variants | Number of filtered variants |
+| Datasets | Computing time: 8 threads; 8000 MB RAM | Computing time: 32 threads; 32000 MB RAM  | Max alleles | Number of samples | Number of loaded variants | Number of filtered variants |
 | --- | --- | --- | --- | --- | --- | --- |
 | Rice Dataset | 599s | 376s | 2 | 143 | 35,568,995 | 30,904,333 |
 
 **Note:** Computing time represents the time it took to complete runs on eight threads and 8000 MB RAM of memory and 32 threads and 32000 MB RAM of memory; Max alleles represents the PLINK --max-alleles flag, which filters out variants with more than a given number of alleles; Number of samples and variants represents the number of samples and variants calculated at the analysis stage. In the PSReliP pipeline, the –threads and --memory flags are used in the PLINK command lines, and the values of these parameters can be specified in the configuration file [(psrelip.config)](./psrelip.config)
 ### Parameter values, the number of samples and variants, and the required time (second shell script) for the [case study dataset](../Case_study_datasets).
-| Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup> | Types of variants | Geno<sup>c</sup> | Mind<sup>c</sup> | Maf<sup>c</sup> | Meanimpute<sup>c</sup> | Clustering<sup>c</sup> | Number of groups<sup>c</sup> | window size<sup>d</sup> | vc or kb<sup>d</sup> | step size<sup>d</sup> | r2 threshold<sup>d</sup> | Samples | Loaded variants | Filtered variants | Filtered and pruned variants |
+| Datasets | Computing time: 8 threads; 8000 MB RAM | Computing time: 32 threads; 32000 MB RAM | Types of variants | Geno | Mind | Maf | Meanimpute | Clustering | Number of groups | window size | vc or kb | step size | r2 threshold | Samples | Loaded variants | Filtered variants | Filtered and pruned variants |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Rice Dataset | 94s | 81s | SNPs and InDels | 0.2 | 0.2 | 0.05 |	⃝ | × | 5 | 100 | kb | 1 | 0.2 | 110 | 30,904,333 | 4,449,631 | 33,539 |
 
