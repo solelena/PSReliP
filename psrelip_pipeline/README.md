@@ -65,7 +65,7 @@
 > **of filtered and LD pruned dataset:**<br>
 > --het 'cols=+het,+het'<br>
 > --ibc<br>
-* The PLINK command lines for LD-based variant pruning (a pruned subset of variants will be written to plink2.prune.in, which is valid input for --extract):
+* The PLINK command lines for LD-based variant pruning (a pruned subset of variants will be written to plink2.prune.in, which is a valid input for --extract):
 > **window size in kilobase:**<br>
 > --indep-pairwise $LD_WINDOW_SIZE $LD_WINDOW_SIZE_UNITS 1 $LD_THRESHOLD<br>
 > **window size in variant count:**<br>
@@ -74,23 +74,23 @@
 > --extract plink2.prune.in<br>
 * The PLINK command line for clustering calculations and multidimensional scaling (MDS) report generation (PLINK 1.9):
 > --cluster --K $GROUPS_NO --mds-plot 10<br>
-* The PLINK command lines for top 10 principal components (PCs) extraction:
+* The PLINK command line for top 10 principal components (PCs) extraction:
 > --read-freq plink2.acount --pca<br>
 > **with the 'meanimpute' modifier to request mean-imputes missing genotype calls:**<br>
 >--read-freq plink2.acount --pca meanimpute
-* The PLINK command lines for FST (Pairwise fixation index) estimation between pairs of subpopulations defined as a categorical phenotype:
+* The PLINK command line for FST (Pairwise fixation index) estimation between pairs of subpopulations is defined as a categorical phenotype:
 > --fst CATEGORY --pheno groups.list<br>
 > **with the 'report-variants' modifier to request per-variant FST estimates:**<br>
 > --fst CATEGORY 'report-variants' --pheno groups.list
-* The PLINK command line for IBS (identity-by-state) matrix calculation (PLINK 1.9):
+* The PLINK command line for the IBS (identity-by-state) matrix calculation (PLINK 1.9):
 > --distance square ibs<br>
-* The PLINK command lines for relationship matrix computation:
+* The PLINK command line for relationship matrix computation:
 > --read-freq plink2.acount --make-rel square<br>
 > **with the 'meanimpute' modifier to request mean-imputes missing genotype calls:**<br>
 > --read-freq plink2.acount --make-rel meanimpute square
 * The PLINK command line for KING kinship coefficients computation:
 > --make-king square<br>
-* In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purpose, for pipelining, and some other purposes.
+* In addition to the PLINK commands, in-house Perl programs are used to reorder samples and their corresponding values in matrices of various types, to edit various values (such as replacing negative values with 0) for visualization purposes, pipelining, and other purposes.
 ### The parameter values used, the number of samples and variants, and the required time (first shell script) for the [case study dataset](../Case_study_datasets).
   Used parameter values, number of samples and variants, and required time (first shell script)
 | Datasets | Computing time: 8 threads<sup>a</sup>; 8000 MB RAM<sup>b</sup> | Computing time: 32 threads<sup>a</sup>; 32000 MB RAM<sup>b</sup>  | Max alleles | Number of samples | Number of loaded variants | Number of filtered variants |
