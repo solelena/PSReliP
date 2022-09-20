@@ -45,4 +45,4 @@
 
 <img src="../Images/case_study_UI_screenshots/rel_tab_grm_chart.png" width=80% height=80%>
 
-<img src="../Images/case_study_UI_screenshots/rel_tab_kkm_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/rel_tab_kinship_chart" width=80% height=80%>
