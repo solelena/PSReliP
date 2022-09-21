@@ -13,7 +13,7 @@
 #### User interface
   The screenshots of the user interface of this Shiny app can be found in the [Images](../Images/case_study_UI_screenshots) folder.<br>
   The Shiny app created by our pipeline contains four tabs corresponding to the types of analysis performed in it. These tabs are as follows: 1) ‘Basic statistics’; 2) ‘Population Stratification analysis’; 3) ‘Wright's FST estimation’; 4) ‘IBS and GRM calculation & Kinship Coefficients estimation’.<br>
-* On the opening page, the first tab "Basic statistics" displays the 'Sample variant-count report' in a tabular format. <br>
+* On the opening page, the first tab "Basic statistics" displays the 'Sample variant-count report' in tabular format. <br>
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_table.png" width=80% height=80%>
 
 * By selecting "Chart" in the radio button labeled "Views", users can display this report as a stacked bar chart.<br>
