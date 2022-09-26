@@ -1,7 +1,6 @@
-# PSReliP
-## Population Structure and Relatedness integrated Pipeline
-***The integrated pipeline for analysis and visualization of population structure and relatedness based on genome-wide genetic variant data***  
-  The PSRelIP pipeline allows users to quickly analyze genetic variants such as SNPs and InDels at the genome level to estimate population structure and cryptic relatedness using the PLINK software and visualize the analysis results in interactive tables, plots and charts using Shiny technology. Analysis and assessment of population stratification and genetic relatedness can be helpful in choosing an appropriate approach for statistical analysis of GWAS data and predictions in Genomic Selection. The various outputs from PLINK can be used in further downstream analysis.<br>
+## Population Structure and Relatedness integrated Pipeline (PSReliP)
+***PSReliP: an integrated pipeline for analysis and visualization of population structure and relatedness based on genome-wide genetic variant data***  
+  The PSReliP pipeline allows users to quickly analyze genetic variants such as single nucleotide polymorphisms and small insertions or deletions at the genome level to estimate population structure and cryptic relatedness using PLINK software and to visualize the analysis results in interactive tables, plots, and charts using Shiny technology. The analysis and assessment of population stratification and genetic relatedness can aid in choosing an appropriate approach for the statistical analysis of GWAS data and predictions in genomic selection. The various outputs from PLINK can be used for further downstream analysis.<br>
 ## Features
 - Quality control and filtering of samples and variants.
 - Calculation of basic sample statistics, such as the types of observed variants, inbreeding coefficients and some others, performed before and after data filtering.
