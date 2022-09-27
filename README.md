@@ -2,13 +2,13 @@
 ***PSReliP: an integrated pipeline for analysis and visualization of population structure and relatedness based on genome-wide genetic variant data***  
   The PSReliP pipeline allows users to quickly analyze genetic variants such as single nucleotide polymorphisms and small insertions or deletions at the genome level to estimate population structure and cryptic relatedness using PLINK software and to visualize the analysis results in interactive tables, plots, and charts using Shiny technology. The analysis and assessment of population stratification and genetic relatedness can aid in choosing an appropriate approach for the statistical analysis of GWAS data and predictions in genomic selection. The various outputs from PLINK can be used for further downstream analysis.<br>
 ## Features
-- Quality control and filtering of samples and variants.
-- Calculation of basic sample statistics, such as the types of observed variants, inbreeding coefficients and some others, performed before and after data filtering.
-- Analysis of population stratification using PCA and MDS, and if it is selected, complete-linkage hierarchical clustering of samples based on IBS distance matrix.
-- Calculation of Wright's fixation index (FST).
-- Calculation of IBS distance matrix and analysis of genetic relatedness by estimating KING kinship coefficient matrix and genomic relationship matrix (GRM).
-- Interactive visualizations of analysis results using R Shiny technology.
-- Ability for users to download analysis results and all plotted graphs using the web interface.
+- QC and  and filtering of samples and variants;
+- calculation of basic sample statistics, such as the types of observed variants, inbreeding coefficients, etc., and performing the before and after data filtering;
+- analysis of PS using PCA and MDS, and complete-linkage hierarchical clustering of samples based on the IBS distance matrix, if selected;
+- calculation of Wright's FST;
+- calculation of the IBS distance matrix and analysis of genetic relatedness by estimating the KING kinship coefficient matrix and GRM;
+- interactive visualization of the analysis results using Shiny technology;
+- ability for users to download analysis results and all plotted graphs using the web interface.
 ### ***The structure and main features of the PSReliP pipeline***
 <img src="./Images/overview_pipeline_structure.png" width=100% height=100%>
 
