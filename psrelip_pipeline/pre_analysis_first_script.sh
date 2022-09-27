@@ -1,7 +1,10 @@
 #! /bin/bash
 #
 
+#source $1
+
 CONF_FILE=/home/user/psrelip_pipeline/psrelip.config
+
 if [ -f "$CONF_FILE" ]
 then
   source "$CONF_FILE"
