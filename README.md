@@ -34,11 +34,11 @@
 <img src="https://github.com/solelena/PSReliP/blob/main/Images/pipeline_implementation.png" width=100% height=100%>
 
 ## Installation
-* Install PLINK (1.9 and 2.0) in UNIX/Linux based OS.
-* Create a directory in your home directory you would like to install the PSReliP pipeline.
-* Copy the files and the 'program_files' folder contained in the [PSReliP pipeline](./psrelip_pipeline) folder, which includes the two shell scripts, the configuration file, Perl programs and Shiny app.R files to the directory you created. This directory is the installation directory of the pipeline and must be specified in the "TOOL_INSTALL_DIR" parameter in the [configuration file](./psrelip_pipeline/psrelip.config). It is important to leave the names and structure of the 'program_files' folder in this directory. The two shell scripts and the configuration file can be renamed and placed in any directory. The path to the configuration file must be specified in both shell scripts.
+* Install PLINK (1.9 and 2.0) on a UNIX/Linux based OS.
+* Create a directory in the home directory where you want to install the PSReliP pipeline.
+* Copy the files and the 'program_files' folder contained in the [PSReliP pipeline](./psrelip_pipeline) folder, which includes the two shell scripts, configuration file, Perl programs and Shiny app.R files into the directory you created. This directory is the installation directory of the pipeline and must be specified in the "TOOL_INSTALL_DIR" parameter in the [configuration file](./psrelip_pipeline/psrelip.config). It is important to leave the names and structure of the 'program_files' folder in this directory. The two shell scripts and the configuration file can be renamed and placed in any directory. The path to the configuration file must be specified in both shell scripts.
 * Edit the [configuration file](./psrelip_pipeline/psrelip.config) and specify the path to the PLINK executables (1.9 and 2.0), the pipeline installation directory explained above, the working directory, the input files and the parameter values used in the analysis and visualization processes.
-* Install the necessary R packages in a UNIX/Linux-based OS if you want to run the Shiny app on a [Shiny Server](https://github.com/rstudio/shiny-server), or in RStudio if you want to run the Shiny app in a desktop version of [RStudio](https://www.rstudio.com/products/rstudio/).
+* Install the necessary R packages in a UNIX/Linux-based OS if you want to run the Shiny app on the [Shiny Server](https://github.com/rstudio/shiny-server), or in RStudio if you want to run the Shiny app in the desktop version of [RStudio](https://www.rstudio.com/products/rstudio/).
 ## Version Requirements
 - PLINK 1.9: 19 Oct 2020 or later.
 - PLINK 2.0: 8 Jun 2021 or later.
