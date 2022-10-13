@@ -78,7 +78,7 @@ We prepared two Shiny apps that differ only in whether they plot the Manhattan p
 * The PLINK command line for top 10 principal components (PCs) extraction:
 > --read-freq plink2.acount --pca<br>
 > **with the 'meanimpute' modifier to request mean-imputes missing genotype calls:**<br>
->--read-freq plink2.acount --pca meanimpute
+> --read-freq plink2.acount --pca meanimpute
 * The PLINK command line for FST (Pairwise fixation index) estimation between pairs of subpopulations is defined as a categorical phenotype:
 > --fst CATEGORY --pheno groups.list<br>
 > **with the 'report-variants' modifier to request per-variant FST estimates:**<br>
