@@ -53,6 +53,7 @@
 <img src="https://github.com/solelena/PSReliP/blob/main/Images/dir_files_structure.png" width=100% height=100%>
 
 **Note** that some temporarily created files are deleted during the execution of both shell scripts to reduce disk space usage.<br>
+## Running the Shiny app
 * To run the newly created Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The Shiny app can also be deployed to [ShinyApps.io](https://www.shinyapps.io/) or hosted on the [Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/).
 * We created the Shiny app for the Case Study dataset, which we placed in the [Case_study_datasets](./Case_study_datasets) folder to illustrate the capabilities of our pipeline and the features of its user interface. Details of this case study can be found in the [README.md](./Case_study_datasets/README.md) file located in that folder. Screenshots of the user interface of this Shiny app can be found in the [Images](./Images/case_study_UI_screenshots) folder.<br>
 
