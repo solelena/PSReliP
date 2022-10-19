@@ -1,8 +1,8 @@
 ### Screenshots of the user interface for the [case study](../../Case_study_datasets/rapdb_30depth_5gr_ld_pr/)
 | File | Description |
 | --- | --- |
-| basic_statistics_tab_svc_table.png | Tabular representation of the 'Sample variant-count report' on the 'Basic statistics' tab |
-| basic_statistics_tab_svc_chart.png | Chart representation of the 'Sample variant-count report' on the 'Basic statistics' tab |
+| basic_statistics_tab_svc_tbl.png | Tabular representation of the 'Sample variant-count report' on the 'Basic statistics' tab |
+| basic_statistics_tab_svc_crt.png | Chart representation of the 'Sample variant-count report' on the 'Basic statistics' tab |
 | basic_statistics_tab_smd_chart.png | Chart representation of the 'Sample-based missing data report' on the 'Basic statistics' tab |
 | basic_statistics_tab_fce_chart.png | Chart representation of the 'Method-of-moments F coefficient estimates' on the 'Basic statistics' tab |
 | basic_statistics_tab_icr_chart.png | Chart representation of the 'GCTA inbreeding coefficient report' on the 'Basic statistics' tab |
