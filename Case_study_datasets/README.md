@@ -25,7 +25,7 @@
 
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_fce_crt.png" width=80% height=80%>
 
-<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_icr_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_icr_crt.png" width=80% height=80%>
 
 * On the 'Population Stratification analysis' tab, users can display the results of population stratification analysis in the form of 'PCA', 'Normalized PCs' and 'MDS' charts by selecting the corresponding values from the radio button labeled 'Methods'.
 
