@@ -21,7 +21,7 @@
 
 * Also on this tab, users can display other reports, such as the 'Sample-based missing data report', 'Method-of-moments F coefficient estimates', and 'GCTA inbreeding coefficient report', by selecting the corresponding values from the radio button labeled 'Reports'. <br>
 
-<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_smd_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_smd_crt.png" width=80% height=80%>
 
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_fce_chart.png" width=80% height=80%>
 
