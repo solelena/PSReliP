@@ -31,7 +31,7 @@
 
 <img src="../Images/case_study_UI_screenshots/psa_tab_pca_crt.png" width=80% height=80%>
 
-<img src="../Images/case_study_UI_screenshots/psa_tab_nor_pca_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/psa_tab_nor_pca_crt.png" width=80% height=80%>
 
 <img src="../Images/case_study_UI_screenshots/psa_tab_mds_chart.png" width=80% height=80%>
 
