@@ -37,7 +37,7 @@
 
 * The 'Wright's FST estimation' tab allows users to display Manhattan plots for the results of Wright's fixation index (FST) analysis for each variant between pairs of selected subpopulations. These plots display genetic variants with per-variant FST values against their genomic position. In our pipeline, we run the PLINK --fst command with the 'report-variants' modifier, which calculates the per-variant FST estimates, and then output these results to Manhattan plots only if the number of groups/clusters is ≤5 (to control the output size). We plot chromosomes/contigs one at a time or the entire genome region only if the number of variants is ≥100 and ≤ 100,000. Users can switch these views by changing the corresponding values from the "Chromosome/Contig number/name:" drop-down list.
 
-<img src="../Images/case_study_UI_screenshots/fst_tab_pfi_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/fst_tab_pfi_crt.png" width=80% height=80%>
 
 * On the 'IBS and GRM calculation & Kinship Coefficients estimation' tab, users can display the results of the three types of calculations by selecting the corresponding values from the radio button labeled 'Methods'. We prepared three methods: IBS matrix calculation, GRM, and KING-robust kinship estimation. The results are displayed on interactive heatmaps, where samples can be ordered in two ways, ‘PLINK Sample ID’ and ‘Group/Cluster number’. The list of sample IDs/Names on the heatmap can be in the same order as in the matrix derived from the corresponding PLINK command, or samples can be reordered according to the groups/clusters to which they are assigned.
 
