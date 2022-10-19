@@ -5,7 +5,7 @@
 | basic_statistics_tab_svc_crt.png | Chart representation of the 'Sample variant-count report' on the 'Basic statistics' tab |
 | basic_statistics_tab_smd_crt.png | Chart representation of the 'Sample-based missing data report' on the 'Basic statistics' tab |
 | basic_statistics_tab_fce_crt.png | Chart representation of the 'Method-of-moments F coefficient estimates' on the 'Basic statistics' tab |
-| basic_statistics_tab_icr_chart.png | Chart representation of the 'GCTA inbreeding coefficient report' on the 'Basic statistics' tab |
+| basic_statistics_tab_icr_crt.png | Chart representation of the 'GCTA inbreeding coefficient report' on the 'Basic statistics' tab |
 | psa_tab_pca_chart.png | Chart representation of the 'PCA' on the 'Population Stratification analysis' tab |
 | psa_tab_nor_pca_chart.png | Chart representation of the 'Normalized PCs' on the 'Population Stratification analysis' tab |
 | psa_tab_mds_chart.png | Chart representation of the 'MDS' on the 'Population Stratification analysis' tab |
