@@ -29,7 +29,7 @@
 
 * On the 'Population Stratification analysis' tab, users can display the results of population stratification analysis in the form of 'PCA', 'Normalized PCs' and 'MDS' charts by selecting the corresponding values from the radio button labeled 'Methods'.
 
-<img src="../Images/case_study_UI_screenshots/psa_tab_pca_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/psa_tab_pca_crt.png" width=80% height=80%>
 
 <img src="../Images/case_study_UI_screenshots/psa_tab_nor_pca_chart.png" width=80% height=80%>
 
