@@ -23,7 +23,7 @@
 
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_smd_crt.png" width=80% height=80%>
 
-<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_fce_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_fce_crt.png" width=80% height=80%>
 
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_icr_chart.png" width=80% height=80%>
 
