@@ -17,7 +17,7 @@
 <img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_tbl.png" width=80% height=80%>
 
 * By selecting "Chart" from the radio button labeled "Views", users can display this report as a stacked bar chart.<br>
-<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_chart.png" width=80% height=80%>
+<img src="../Images/case_study_UI_screenshots/basic_statistics_tab_svc_crt.png" width=80% height=80%>
 
 * Also on this tab, users can display other reports, such as the 'Sample-based missing data report', 'Method-of-moments F coefficient estimates', and 'GCTA inbreeding coefficient report', by selecting the corresponding values from the radio button labeled 'Reports'. <br>
 
