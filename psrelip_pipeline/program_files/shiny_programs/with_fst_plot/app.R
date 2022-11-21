@@ -1312,7 +1312,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
       files <- NULL
-      for (i in 1:7) {
+      for (i in 1:6) {
         if (i == 1) {
           files <- c("data/plink_distance_ibs.mibs",files)
         } else if (i == 2) {
@@ -1325,8 +1325,6 @@ server <- function(input, output, session) {
           files <- c("data/plink_kinship.king",files)
         } else if (i == 6) {
           files <- c("data/plink_kinship.king.id",files)
-        } else if (i == 7) {
-          files <- c("data/tassel_kinship.txt",files)
         }
       }
       zip(file,files)
