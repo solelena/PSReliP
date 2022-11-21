@@ -45,11 +45,11 @@
 ## Preparing to run the Shiny app
 * Install the necessary R packages in a UNIX/Linux-based OS if you want to run the Shiny app on the [Shiny Server](https://github.com/rstudio/shiny-server), or in RStudio if you want to run the Shiny app in the desktop version of [RStudio](https://www.rstudio.com/products/rstudio/).
 ## Version Requirements
--  For analysis stage of pipeline
-  -LINK 1.9: 19 Oct 2020 or later.
-  PLINK 2.0: 8 Jun 2021 or later.
-- For vlization component
-  - R andpackages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
+- For analysis stage of pipeline:
+  - PLINK 1.9: 19 Oct 2020 or later.
+  - PLINK 2.0: 8 Jun 2021 or later.
+- For visualization component:
+  - R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
 ## Getting Started
 * In the configuration file, specify the path to the input genotype file in the '.vcf/.vcf.gz/.bcf/.bcf.gz' format in the 'VCF_FILE_NAME' parameter.
 * In the configuration file, in the "WD" parameter, specify the path to the working directory in which all analysis output files will be saved (there can be one working directory for each Variant Call Format file).
