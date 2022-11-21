@@ -33,16 +33,23 @@
 ### ***Implementation of the PSReliP pipeline***
 <img src="https://github.com/solelena/PSReliP/blob/main/Images/pipeline_implementation.png" width=100% height=100%>
 
-## Installation
-* Install PLINK (1.9 and 2.0) on a UNIX/Linux based OS.
-* Create a directory in the home directory where you want to install the PSReliP pipeline.
-* Copy the files and the 'program_files' folder contained in the [PSReliP pipeline](./psrelip_pipeline) folder, which includes the two shell scripts, configuration file, Perl programs and Shiny app.R files into the directory you created. This directory is the installation directory of the pipeline and must be specified in the "TOOL_INSTALL_DIR" parameter in the [configuration file](./psrelip_pipeline/psrelip.config). It is important to leave the names and structure of the 'program_files' folder in this directory. The two shell scripts and the configuration file can be renamed and placed in any directory. The path to the configuration file must be specified in both shell scripts.
+## Installation of the PSReliP pipeline
+- Install PLINK (1.9 and 2.0) on a UNIX/Linux based OS.
+- Create a directory in the home directory where you want to install the PSReliP pipeline.
+- Install the PSReliP pipeline.
+  - Download the PSReliP pipeline source code [latest release](https://github.com/solelena/PSReliP/releases/download/v1.1.0/v1.1.tar.gz) in the istalation directory. Unzip the [latest release].tar.gz file with 'tar -xvzf'. The **[user-created directory]/psrelip** directory will be the pipeline installation directory.<br>
+  - Another way to install the PSReliP pipeline: copy the files and the 'program_files' folder contained in the [PSReliP pipeline](./psrelip_pipeline) folder, which includes the two shell scripts, configuration file, Perl programs and Shiny app.R files into the directory you created. The **[user-created directory]** directory will be the installation directory for the pipeline.<br>
+
+  The installation directory of the pipeline must be specified in the "TOOL_INSTALL_DIR" parameter in the [configuration file](./psrelip_pipeline/psrelip.config). It is important to leave the names and structure of the 'program_files' folder in this directory. The two shell scripts and the configuration file can be renamed and placed in any directory. The path to the configuration file must be specified in both shell scripts.
 * Edit the [configuration file](./psrelip_pipeline/psrelip.config) and specify the path to the PLINK executables (1.9 and 2.0), the pipeline installation directory explained above, the working directory, the input files and the parameter values used in the analysis and visualization processes.
+## Preparing to run the Shiny app
 * Install the necessary R packages in a UNIX/Linux-based OS if you want to run the Shiny app on the [Shiny Server](https://github.com/rstudio/shiny-server), or in RStudio if you want to run the Shiny app in the desktop version of [RStudio](https://www.rstudio.com/products/rstudio/).
 ## Version Requirements
-- PLINK 1.9: 19 Oct 2020 or later.
-- PLINK 2.0: 8 Jun 2021 or later.
-- R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
+-  For analysis stage of pipeline
+  -LINK 1.9: 19 Oct 2020 or later.
+  PLINK 2.0: 8 Jun 2021 or later.
+- For vlization component
+  - R andpackages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
 ## Getting Started
 * In the configuration file, specify the path to the input genotype file in the '.vcf/.vcf.gz/.bcf/.bcf.gz' format in the 'VCF_FILE_NAME' parameter.
 * In the configuration file, in the "WD" parameter, specify the path to the working directory in which all analysis output files will be saved (there can be one working directory for each Variant Call Format file).
