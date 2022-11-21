@@ -645,7 +645,6 @@ ui <- fluidPage(
           span(id = "fst_val", textOutput("selected_clusters"))
         )
        ),
-      #tags$span(id = "comment2_text", message_fst),
       HTML(message_fst),
       tags$br(),
       tags$br(),
