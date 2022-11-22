@@ -9,6 +9,7 @@
 #### Folder contents
   The Shiny application folder [rapdb_30depth_5gr_ld_pr](./rapdb_30depth_5gr_ld_pr) contains an app.R file and a 'data' subfolder with analysis results files.
 #### Running the Shiny app
+- Install all required R packages in your R environment. These packages are listed in the main [README file](../README.md) of this repository.
 - Download the Shiny app folder. To run the Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The app will open in a new window. In addition, the Shiny application can be run on Shiny servers such as shinyapps.io, RStudio Connect, Shiny Server Open Source, Shiny Server Pro.
 - Run this Shiny app from the GitHub repository
   - **To launch this Shiny app, run the following lines in interactive R sessions (the application files will be stored in a temporary directory and removed when the app exits).**<br>
@@ -48,7 +49,7 @@
 
 <img src="../Images/case_study_UI_screenshots/fst_tab_pfi_crt.png" width=80% height=80%>
 
-* On the 'IBS and GRM calculation & Kinship Coefficients estimation' tab, users can display the results of the three types of calculations by selecting the corresponding values from the radio button labeled 'Methods'. We prepared three methods: IBS matrix calculation, GRM, and KING-robust kinship estimation. The results are displayed on interactive heatmaps, where samples can be ordered in two ways, ‘PLINK Sample ID’ and ‘Group/Cluster number’. The list of sample IDs/Names on the heatmap can be in the same order as in the matrix derived from the corresponding PLINK command, or samples can be reordered according to the groups/clusters to which they are assigned.
+* On the 'IBS and GRM calculation & Kinship Coefficients estimation' tab, users can display the results of the three types of calculations by selecting the corresponding values from the radio button labeled 'Methods'. We prepared three methods: IBS matrix calculation, GRM, and KING-robust kinship estimation. The results are displayed on interactive heatmaps, where samples can be ordered in two ways, ‘PLINK Sample ID’ and ‘Group/Cluster number’. The list of sample IDs/Names on the heatmap can be in the same order as in the matrix derived from the corresponding PLINK command, or samples can be reordered according to the groups/clusters to which they are assigned. We plot heatmaps only if the number of samples is ≤ 400.
 
 <img src="../Images/case_study_UI_screenshots/rel_tab_ibs_crt.png" width=80% height=80%>
 
