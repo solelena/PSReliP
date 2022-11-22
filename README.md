@@ -64,7 +64,7 @@
 * To run the newly created Shiny app locally, use RStudio to open the app.R file in the Shiny app folder and click on "Run App" in the upper right corner of the source panel. The Shiny app can also be deployed to [ShinyApps.io](https://www.shinyapps.io/) or hosted on the [Shiny Server](https://www.rstudio.com/products/shiny/shiny-server/).
 * We created the Shiny app for the Case Study dataset, which we placed in the [Case_study_datasets](./Case_study_datasets) folder to illustrate the capabilities of our pipeline and the features of its user interface. Details of this case study can be found in the [README.md](./Case_study_datasets/README.md) file located in that folder. Screenshots of the user interface of this Shiny app can be found in the [Images](./Images/case_study_UI_screenshots) folder.<br>
 
-  **To launch this Shiny app for the Case Study dataset, run the following lines in interactive R sessions (the application files will be stored in a temporary directory and removed when the app exits).**<br>
+  **If all required R packages (see above) are installed in your R environment, run the following lines in interactive R sessions to launch this Shiny app for the Case Study dataset from the github repository. The application files will be stored in a temporary directory and removed when the app exits.**<br>
   > library(shiny)<br>
   > runGitHub("PSReliP", "solelena", subdir = "Case_study_datasets/rapdb_30depth_5gr_ld_pr")<br>
 
