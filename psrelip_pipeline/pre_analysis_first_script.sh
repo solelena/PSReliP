@@ -39,6 +39,9 @@ else
   mkdir -p "${WD}"/bed_files
 fi
 
+TIME_START=`date +%s`
+echo "Start time: `date '+%Y/%m/%d %H:%M:%S'` Start the pre-analysis step"
+
 if [ "${VCF_FILE_NAME##*.}" = "bcf" ]
 then
   "${PLINK2_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
@@ -68,3 +71,8 @@ fi
 
 "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --freq counts --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_frc
 
+TIME_END=`date +%s`
+echo "End time: `date '+%Y/%m/%d %H:%M:%S'` End the pre-analysis step"
+
+TIME_EXEC=`expr ${TIME_END} - ${TIME_START}`
+echo "Execution time is $TIME_EXEC seconds"
