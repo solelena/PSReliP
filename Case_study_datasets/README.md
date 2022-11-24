@@ -49,7 +49,7 @@
 
 <img src="../Images/case_study_UI_screenshots/fst_tab_pfi_crt.png" width=80% height=80%>
 
-* On the 'IBS and GRM calculation & Kinship Coefficients estimation' tab, users can display the results of the three types of calculations by selecting the corresponding values from the radio button labeled 'Methods'. We prepared three methods: IBS matrix calculation, GRM, and KING-robust kinship estimation. The results are displayed on interactive heatmaps, where samples can be ordered in two ways, ‘PLINK Sample ID’ and ‘Group/Cluster number’. The list of sample IDs/Names on the heatmap can be in the same order as in the matrix derived from the corresponding PLINK command, or samples can be reordered according to the groups/clusters to which they are assigned. We plot heatmaps only if the number of samples is ≤ 400.
+* On the 'IBS and GRM calculation & Kinship Coefficients estimation' tab, users can display the results of the three types of calculations by selecting the corresponding values from the radio button labeled 'Methods'. We prepared three methods: IBS matrix calculation, GRM, and KING-robust kinship estimation. The results are displayed on interactive heatmaps, where samples can be ordered in two ways, ‘PLINK Sample ID’ and ‘Group/Cluster number’. The list of sample IDs/Names on the heatmap can be in the same order as in the matrix derived from the corresponding PLINK command, or samples can be reordered according to the groups/clusters to which they are assigned. We build heatmaps only if the number of samples is ≤ 400.
 
 <img src="../Images/case_study_UI_screenshots/rel_tab_ibs_crt.png" width=80% height=80%>
 
