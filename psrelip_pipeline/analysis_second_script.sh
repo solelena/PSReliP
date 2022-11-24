@@ -72,8 +72,6 @@ then
   if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b.psam ]
   then
     rm -f "${INPUT_DIR}"/*
-  else
-    echo "${INPUT_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi 
 else
   mkdir -p "${INPUT_DIR}"
@@ -86,8 +84,6 @@ then
     if [ -f "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in ]
     then
       rm -f "${PRUNED_SET_DIR}"/*
-    else
-      echo "${PRUNED_SET_DIR}/${OUTPUT_PREFIX} files do not exist"
     fi
   else
     mkdir -p "${PRUNED_SET_DIR}"
@@ -99,8 +95,6 @@ then
   if [ -f "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_miss.smiss ]
   then
    rm -f "${BS_OUTPUT_DIR}"/*
-  else
-   echo "${BS_OUTPUT_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi
 else
   mkdir -p "${BS_OUTPUT_DIR}"
@@ -111,8 +105,6 @@ then
   if [ -f "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.mds ]
   then
     rm -f "${PSA_OUTPUT_DIR}"/*
-  else
-    echo "${PSA_OUTPUT_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi
 else
   mkdir -p "${PSA_OUTPUT_DIR}"
@@ -123,8 +115,6 @@ then
   if [ -f "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst.fst.summary ]
   then
     rm -f "${FST_OUTPUT_DIR}"/*
-  else
-    echo "${FST_OUTPUT_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi
 else
   mkdir -p "${FST_OUTPUT_DIR}"
@@ -135,8 +125,6 @@ then
   if [ -f "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs ]
   then
     rm -f "${KSH_OUTPUT_DIR}"/*
-  else
-    echo "${KSH_OUTPUT_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi
 else
   mkdir -p "${KSH_OUTPUT_DIR}"
@@ -148,12 +136,13 @@ then
   then
     rm -f "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/*
     rm -f "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/*
-  else
-    echo "${SHINY_APP_DIR}/${OUTPUT_PREFIX} files do not exist"
   fi
 else
   mkdir -p "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data
 fi
+
+TIME_START=`date +%s`
+echo "Start time: `date '+%Y/%m/%d %H:%M:%S'` Start the analysis stage"
 
 if [ "${EXTRA_CHR_FLAG}" -eq 0 ] && [ "${NUMBER_OF_CHROMOSOMES}" -eq 0 ]
 then
@@ -445,8 +434,6 @@ then
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
     then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
-    else
-      echo "${INPUT_DIR}/${OUTPUT_PREFIX}_grm_diagonal.txt file does not exist"
     fi
 
     if [ ${SAMPLES_NO} -le 400 ]
@@ -489,8 +476,6 @@ then
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
     then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
-    else
-      echo "${INPUT_DIR}/${OUTPUT_PREFIX}_grm_diagonal.txt file does not exist"
     fi
 
     if [ ${SAMPLES_NO} -le 400 ]
@@ -677,8 +662,6 @@ else
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
     then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
-    else
-      echo "${INPUT_DIR}/${OUTPUT_PREFIX}_grm_diagonal.txt file does not exist"
     fi
 
     if [ ${SAMPLES_NO} -le 400 ]
@@ -721,8 +704,6 @@ else
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
     then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
-    else
-      echo "${INPUT_DIR}/${OUTPUT_PREFIX}_grm_diagonal.txt file does not exist"
     fi
 
     if [ ${SAMPLES_NO} -le 400 ]
@@ -787,3 +768,11 @@ else
 
 fi
 
+cd "${SHINY_APP_DIR}"
+zip -rm "${OUTPUT_PREFIX}" "${OUTPUT_PREFIX}"
+
+TIME_END=`date +%s`
+echo "End time: `date '+%Y/%m/%d %H:%M:%S'` End the analysis stage"
+
+TIME_EXEC=`expr ${TIME_END} - ${TIME_START}`
+echo "Execution time is $TIME_EXEC seconds"
