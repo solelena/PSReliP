@@ -51,7 +51,7 @@
 
   Edit the [configuration file](./psrelip_pipeline/psrelip.config) and specify the path to the PLINK executables (1.9 and 2.0), the pipeline installation directory and the working directory as described above, and specify the path to the input files and set the parameter values used in the analysis and visualisation processes.
 ## Preparing to run the Shiny app
-- Install the required R packages in Linux-based operating systems if you want to run the Shiny application on the [Shiny Server](https://github.com/rstudio/shiny-server), or in [RStudio](https://www.rstudio.com/products/rstudio/) if you want to run the Shiny application in the 'RStudio Desktop' version.
+- Install the required R packages in Linux-based operating systems if you want to run the Shiny application on the [Shiny Server](https://github.com/rstudio/shiny-server), or in [RStudio](https://www.rstudio.com/products/rstudio/) if you want to run the Shiny application in the RStudio Desktop.
 ## Version Requirements
 - For analysis stage of pipeline:
   - PLINK 1.9: 19 Oct 2020 or later.
