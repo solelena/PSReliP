@@ -7,18 +7,23 @@
   The screenshots of the user interface of this Shiny app can be found in the [Images](../Images/Examples_large_datasets) folder.<br>
   The Shiny app created by our pipeline contains four tabs corresponding to the types of analysis performed in it. These tabs are as follows: 1) ‘Basic statistics’; 2) ‘Population Stratification analysis’; 3) ‘Wright's FST estimation’; 4) ‘IBS and GRM calculation & Kinship Coefficients estimation’.<br>
 * **'Basic statistics' tab 'Sample variant-count report'**<br>
+***From the 'maize_1049samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_svcr_gr_ld.png" width=80% height=80%>
 
 * **'Basic statistics' tab 'Method-of-moments F coefficient estimates'**<br>
+***From the 'maize_1049samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_momf_zoom_in_gr_ld.png" width=80% height=80%>
 
 * **'Population Stratification analysis' tab 'Principal Components Analysis (PCA)'**<br>
+***From the 'maize_1049samp_cl5_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_pca_pc1_pc2_cl5_ld.png" width=80% height=80%>
 
 * **'Population Stratification analysis' tab 'Multidimensional Scaling (MDS)' C1-C2**<br>
+***From the 'maize_1049samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_mds_c1_c2_gr_ld.png" width=80% height=80%>
 
 * **'Population Stratification analysis' tab 'Multidimensional Scaling (MDS)' C1-C3**<br>
+***From the 'maize_1049samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_mds_c1_c3_gr_ld.png" width=80% height=80%>
 
 * **'Wright's FST estimation' tab Pairs of clusters: C0-C1**<br>
@@ -26,10 +31,13 @@
 <img src="../Images/Examples_large_datasets/1049sam_fst_cl5_ld.png" width=80% height=80%>
 
 * **'IBS and GRM calculation & Kinship Coefficients estimation' tab 'IBS (Identity-by-state/Hamming distance) matrix'**<br>
+***From the 'maize_380samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/380sam_ibs_gr_ld.png" width=80% height=80%>
 
 * **'IBS and GRM calculation & Kinship Coefficients estimation' tab 'IBS (Identity-by-state/Hamming distance) matrix' (zoomed in)**<br>
+***From the 'maize_380samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/380sam_ibs_gr_ld_zoom_in.png" width=80% height=80%>
 
 * **'IBS and GRM calculation & Kinship Coefficients estimation' tab 'Genomic Relationship Matrix (GRM)' (zoomed in)**<br>
+***From the 'maize_380samp_gr_ld' application***<br>
 <img src="../Images/Examples_large_datasets/380sam_grm_gr_ld_zoom_in.png" width=80% height=80%>
