@@ -55,8 +55,8 @@
 - Your Shiny app can also be hosted and deployed to a web page using Shinyapps.io, which is RStudio’s hosting service for Shiny apps. Shinyapps.io is an easy-to-use, secure, and scalable service with free and paid options available.
 ## Version Requirements
 - For analysis stage of pipeline:
-  - PLINK 1.9: 19 Oct 2020 or later.
-  - PLINK 2.0: 8 Jun 2021 or later.
+  - PLINK 1.9: 2 Apr 2022 or later.
+  - PLINK 2.0: 24 Oct 2022 or later.
 - For visualization component:
   - R and R packages: R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0).
 ## Getting Started
