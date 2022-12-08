@@ -22,6 +22,7 @@
 <img src="../Images/Examples_large_datasets/1049sam_mds_c1_c3_gr_ld.png" width=80% height=80%>
 
 * **'Wright's FST estimation' tab Pairs of clusters: C0-C1**<br>
+***From the 'maize_1049samp_cl5_ld' application***<br>
 <img src="../Images/Examples_large_datasets/1049sam_fst_cl5_ld.png" width=80% height=80%>
 
 * **'IBS and GRM calculation & Kinship Coefficients estimation' tab 'IBS (Identity-by-state/Hamming distance) matrix'**<br>
