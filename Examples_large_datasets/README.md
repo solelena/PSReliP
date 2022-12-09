@@ -11,11 +11,10 @@
 R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0)
 - Running these Shiny apps from the GitHub repository:<br>
 **If all required R packages are installed in your R environment, run the following lines in interactive R sessions to launch these Shiny apps from the GitHub repository. The application files will be stored in a temporary directory and removed when the apps exits.**<br>
-> library(shiny)<br>
-> runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
-  > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
-    > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
-  
+  > library(shiny)<br>
+  > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
+  > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_gr_ld")<br>
+  > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_380samp_gr_ld")<br>
 ### User interfaces
   The screenshots of the user interface of these Shiny apps can be found in the [Images](../Images/Examples_large_datasets) folder.<br>
   The Shiny apps created by our pipeline contains four tabs corresponding to the types of analysis performed in it. These tabs are as follows: 1) ‘Basic statistics’; 2) ‘Population Stratification analysis’; 3) ‘Wright's FST estimation’; 4) ‘IBS and GRM calculation & Kinship Coefficients estimation’.<br>
