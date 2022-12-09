@@ -6,6 +6,16 @@
 3. Mural R, Sun G, Grzybowski M, Tross MC, Jin H, Smith C, et al. (2022): Maize_WiDiv_SAM_1051Genotype.vcf.gz genotype file. figshare. Dataset. https://doi.org/10.6084/m9.figshare.19175888.v1. **([Maize_WiDiv_SAM_1051Genotype.vcf.gz](https://figshare.com/articles/dataset/Maize_WiDiv_SAM_1051Genotype_vcf_gz_genotype_file/19175888) genotype file)**
 ### Origins of the data
   From the VCF file above [Ref. 3] we extracted two datasets consisting of 1049 and 380 samples and analysed them with our pipeline. The dataset 1049 contains all samples in SupplementalDataFileS2_GenotypesAndTraitValues.xlsx (Supplemental Data for Ref. 1). The dataset of 380 samples contains samples for which the values of the column "LeafCuticularConductance6_H" in the same Excel file do not equal "NA". This column contains the 'maize leaf cuticular conductance' phenotype values that were collected in the study by Lin et al. 2020 [Ref. 2] in 2017 in Maricopa, Arizona. The resulting applications for these datasets are presented in this sub-repository.<br>
+### Running Shiny apps
+- Required R packages:<br>
+R (3.6+), shiny (1.4.0.2+), plotly (4.9.2.1+), manhattanly (0.2.0+), heatmaply (1.1.0+), ggplot2 (3.3.0+), DT (0.16+), stringr (1.4.0)
+- Running these Shiny apps from the GitHub repository:<br>
+**If all required R packages are installed in your R environment, run the following lines in interactive R sessions to launch these Shiny apps from the GitHub repository. The application files will be stored in a temporary directory and removed when the apps exits.**<br>
+> library(shiny)<br>
+> runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
+  > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
+    > runGitHub("PSReliP", "solelena", subdir = "Examples_large_datasets/maize_1049samp_cl5_ld")<br>
+  
 ### User interfaces
   The screenshots of the user interface of these Shiny apps can be found in the [Images](../Images/Examples_large_datasets) folder.<br>
   The Shiny apps created by our pipeline contains four tabs corresponding to the types of analysis performed in it. These tabs are as follows: 1) ‘Basic statistics’; 2) ‘Population Stratification analysis’; 3) ‘Wright's FST estimation’; 4) ‘IBS and GRM calculation & Kinship Coefficients estimation’.<br>
