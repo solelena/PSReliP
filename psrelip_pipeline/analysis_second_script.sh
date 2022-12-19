@@ -1,10 +1,7 @@
 #! /bin/bash
 #
 
-#CONF_FILE=/lustre/home/elena/maize/psrelip/maize_380samples_gr_ld.config (job id: 3051358)
-#CONF_FILE=/lustre/home/elena/maize/psrelip/maize_380samples_gr.config (job id: 3049732)
-#CONF_FILE=/lustre/home/elena/maize/psrelip/maize_1049samples_cl5_ld.config (job id: 3054010)
-CONF_FILE=/lustre/home/elena/maize/psrelip/maize_1049samples_gr_ld.config
+CONF_FILE=/home/user/psrelip_pipeline/psrelip.config
 
 if [ -f "$CONF_FILE" ]
 then
