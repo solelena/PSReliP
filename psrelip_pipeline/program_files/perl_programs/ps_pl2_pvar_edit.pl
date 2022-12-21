@@ -15,7 +15,7 @@ while(defined ($line = <$fin>)){
   my @fields = split(/\t/, $line);
   if ($fields[0] eq "#CHROM") {
     $header_line_no = $l;
-    last; 
+    last;
   }
   $l++;
 }
@@ -31,7 +31,7 @@ if ($header_line_no == 0) {
       chomp ($line3);
       my @fields = split(/\t/, $line3);
       $bim_col_nu = $#fields + 1;
-      last; 
+      last;
     }
     $l3++;
   }
@@ -46,12 +46,20 @@ while(defined ($line2 = <$fin3>)){
   if ($header_line_no == 0) {
     chomp ($line2);
     my @fields = split(/\t/, $line2);
-    my $variant_id = "";    
+    my $variant_id = "";
     if ($bim_col_nu == 5) {
-      $variant_id = $fields[0].":".$fields[2];    
+      if ($fields[1] eq ".") {
+        $variant_id = $fields[0].":".$fields[2];
+      } else {
+        $variant_id = $fields[1];
+      }
       print $fout $fields[0]."	".$variant_id."	".$fields[2]."	".$fields[3]."	".$fields[4]."\n";
     } elsif ($bim_col_nu == 6) {
-      $variant_id = $fields[0].":".$fields[3];    
+      if ($fields[1] eq ".") {
+        $variant_id = $fields[0].":".$fields[3];
+      } else {
+        $variant_id = $fields[1];
+      }
       print $fout $fields[0]."	".$variant_id."	".$fields[2]."	".$fields[3]."	".$fields[4]."	".$fields[5]."\n";
     }
   } else {
@@ -60,7 +68,12 @@ while(defined ($line2 = <$fin3>)){
     } else {
       chomp ($line2);
       my @fields = split(/\t/, $line2);
-      my $variant_id = $fields[0].":".$fields[1];    
+      my $variant_id = "";
+      if ($fields[2] eq ".") {
+        $variant_id = $fields[0].":".$fields[1];
+      } else {
+        $variant_id = $fields[2];
+      }
       my $line_out = $fields[0]."	".$fields[1]."	".$variant_id;
       for (my $i=3; $i <= $#fields; $i++ ) {
         $line_out .= "	".$fields[$i];
