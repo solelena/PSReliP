@@ -83,4 +83,5 @@
  > `> library(shiny)`<br>
  > `> runGitHub("PSReliP", "solelena", subdir = "Case_study_datasets/rapdb_30depth_5gr_ld_pr", destdir = "C:/Users/User_name/Directory_name")`<br>
   
-  
+## License
+This pipeline is released under the GNU General Public License version 3 (GPL v3.0).<br>
