@@ -85,3 +85,7 @@
   
 ## License
 This pipeline is released under the GNU General Public License version 3 (GPL v3.0).<br>
+
+## Citation
+**PSReliP: an integrated pipeline for analysis and visualization of population structure and relatedness based on genome-wide genetic variant data.** Elena Solovieva and Hiroaki Sakai. Accepted for publication in BMC Bioinformatics (2 Feb 2023).<br>
+
