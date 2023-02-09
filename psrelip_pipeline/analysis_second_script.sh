@@ -310,13 +310,13 @@ then
   
   "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --het 'cols=+het,+het' --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het
   perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het.het "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_het.het 
-  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --ibc --memory "$MAX_MEM_USAGE" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc
+  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --ibc --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc
   cp "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc.ibc "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_ibc.ibc
 
   if [ "${CLUSTERING_FLAG}" -eq 1 ]
   then
     GROUPS_NO=$CLUSTER_K 
-    "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
+    "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
     perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl "${CLUSTERING_FLAG}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list 
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster1 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster1
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster2
@@ -326,10 +326,10 @@ then
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list ]
     then
       GROUPS_NO=$( awk '{print $3}' "${INPUT_DIR}/${OUTPUT_PREFIX}_groups_for_sort.list" | sort | uniq | wc -l )
-      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K "$GROUPS_NO" --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
+      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K "$GROUPS_NO" --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
     else
       GROUPS_NO=2
-      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
+      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
       CLUSTERING_FLAG=1
       perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl ${CLUSTERING_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list  "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list
       cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster1 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster1
