@@ -41,11 +41,11 @@ echo "OUTPUT_PREFIX=$OUTPUT_PREFIX" >&2
 echo "MAX_MEM_USAGE=$MAX_MEM_USAGE" >&2
 echo "MAX_THREADS=$MAX_THREADS" >&2
 
-PERL_PROGRAM_HOME=${TOOL_INSTALL_DIR}/program_files/perl_programs
-SHINY_PROGRAM_HOME=${TOOL_INSTALL_DIR}/program_files/shiny_programs
+PERL_PROGRAM_HOME="${TOOL_INSTALL_DIR}"/program_files/perl_programs
+SHINY_PROGRAM_HOME="${TOOL_INSTALL_DIR}"/program_files/shiny_programs
 
 BED_INPUT_FILE=${WD}/bed_files/plink_input_data
-ALLELE_FREQ_COUNTS_FILE=${BED_INPUT_FILE}_frc.acount
+ALLELE_FREQ_COUNTS_FILE="${BED_INPUT_FILE}"_frc.acount
 
 SAMPLES_NO=0
 GROUPS_NO=0
@@ -57,12 +57,12 @@ MESSAGE_FLAG=0
 FST_PLOT_MESSAGE='no' 
 EIGENVAL_SUM=0
 
-INPUT_DIR=${WD}/input_files/${OUTPUT_PREFIX}
-PRUNED_SET_DIR=${WD}/pruned_subset/${OUTPUT_PREFIX}
-BS_OUTPUT_DIR=${WD}/basic_statistics/${OUTPUT_PREFIX}
-PSA_OUTPUT_DIR=${WD}/psa_output/${OUTPUT_PREFIX}
-FST_OUTPUT_DIR=${WD}/fst_output/${OUTPUT_PREFIX}
-KSH_OUTPUT_DIR=${WD}/kinship_output/${OUTPUT_PREFIX}
+INPUT_DIR="${WD}"/input_files/"${OUTPUT_PREFIX}"
+PRUNED_SET_DIR="${WD}"/pruned_subset/"${OUTPUT_PREFIX}"
+BS_OUTPUT_DIR="${WD}"/basic_statistics/"${OUTPUT_PREFIX}"
+PSA_OUTPUT_DIR="${WD}"/psa_output/"${OUTPUT_PREFIX}"
+FST_OUTPUT_DIR="${WD}"/fst_output/"${OUTPUT_PREFIX}"
+KSH_OUTPUT_DIR="${WD}"/kinship_output/"${OUTPUT_PREFIX}"
 
 if [ -d "${INPUT_DIR}" ]
 then
@@ -242,16 +242,16 @@ else
   else
     if [ "${EXTRA_CHR_FLAG}" -eq 1 ]
     then
-      "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads 8 --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
+      "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     else
-      "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --chr ${RANGE_OF_CHROMOSOMES} --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads 8 --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
+      "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --chr ${RANGE_OF_CHROMOSOMES} --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     fi
   fi
 fi
  
-"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --sample-counts --memory "$MAX_MEM_USAGE" --threads 8 --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_sc
+"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --sample-counts --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_sc
 perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_sc.scount "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_sample_counts_af.scount
-"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --missing sample-only --memory "$MAX_MEM_USAGE" --threads 8 --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_miss
+"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --missing sample-only --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_miss
 perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_af_miss.smiss "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_missing_af.smiss
 SNP_NO_AF=$( grep -vc '^#' "${INPUT_DIR}/${OUTPUT_PREFIX}_pl2_b.pvar" )
 
@@ -262,7 +262,7 @@ else
   echo "${INPUT_DIR}/${OUTPUT_PREFIX}_sv files do not exist"
 fi
 
-"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --make-bed --memory "$MAX_MEM_USAGE" --threads 8 --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b
+"${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --make-bed --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b
 
 if [ ${SAM_ANOTHER_NAME_FLAG} -eq 0 ]
 then
@@ -288,9 +288,9 @@ then
 
   if [ "${LD_WINDOW_SIZE_UNITS}" = "kb" ]
   then
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --indep-pairwise "$LD_WINDOW_SIZE" "$LD_WINDOW_SIZE_UNITS" 1 "$LD_THRESHOLD" --memory "$MAX_MEM_USAGE" --threads 8 --out "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --indep-pairwise "$LD_WINDOW_SIZE" "$LD_WINDOW_SIZE_UNITS" 1 "$LD_THRESHOLD" --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"
   else
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --indep-pairwise "$LD_WINDOW_SIZE" "$LD_STEP_SIZE" "$LD_THRESHOLD" --memory "$MAX_MEM_USAGE" --threads 8 --out "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --indep-pairwise "$LD_WINDOW_SIZE" "$LD_STEP_SIZE" "$LD_THRESHOLD" --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"
   fi
  
   if [ -f "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in ]
@@ -301,14 +301,14 @@ then
     exit
   fi
 
-  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --extract "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in --make-pgen --memory "$MAX_MEM_USAGE" --threads 8 --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b
-  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --extract "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in --make-bed --memory "$MAX_MEM_USAGE" --threads 8 --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b
+  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --extract "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b
+  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --extract "${PRUNED_SET_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}".prune.in --make-bed --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b
    
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.bim
   SAMPLES_NO=$( wc -l <"${INPUT_DIR}/${OUTPUT_PREFIX}_ld${LD_THRESHOLD}_pl_b.fam" )
   SNP_NO=$( grep -vc '^#' "${INPUT_DIR}/${OUTPUT_PREFIX}_ld${LD_THRESHOLD}_pl2_b.pvar" )  
   
-  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --het 'cols=+het,+het' --memory "$MAX_MEM_USAGE" --threads 8 --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het
+  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --het 'cols=+het,+het' --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het
   perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het.het "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_het.het 
   "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --ibc --memory "$MAX_MEM_USAGE" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc
   cp "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc.ibc "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_ibc.ibc
@@ -349,7 +349,7 @@ then
     perl "${PERL_PROGRAM_HOME}"/ps_chr_no_count.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_used_fstplot.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_notused_fstplot.txt
     CHR_CONTIGS_NO=$( wc -l <"${SHINY_APP_DIR}/${OUTPUT_PREFIX}/data/chr_used_fstplot.txt" )
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --fst CATEGORY 'report-variants' --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads 8 --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --fst CATEGORY 'report-variants' --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst.fst.summary "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst.fst.summary
     perl "${PERL_PROGRAM_HOME}"/ps_fst_summary_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst.fst.summary "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.fst.summary
 
@@ -370,13 +370,13 @@ then
       done
     fi
   else
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --fst CATEGORY --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads 8 --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --fst CATEGORY --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst.fst.summary "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst.fst.summary
     perl "${PERL_PROGRAM_HOME}"/ps_fst_summary_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst.fst.summary "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.fst.summary
   fi
 
-  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --distance square ibs --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs
-  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --make-king square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king
+  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --distance square ibs --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs
+  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --make-king square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king
   perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_kinship.king.id 
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_distance_ibs.mibs
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_distance_ibs.mibs.id
@@ -412,7 +412,7 @@ then
 
   if [ "${IMPUTATION_FLAG}" -eq 1 ]
   then
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads 8 --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec 
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenval "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenval
@@ -420,7 +420,7 @@ then
     perl "${PERL_PROGRAM_HOME}"/ps_make_normalized_pcs.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenvec "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenval "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca_norm_pcs.txt
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca_norm_pcs.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/normalized_plink_pca.txt
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel meanimpute square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel meanimpute square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm
     
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id 
 
@@ -454,7 +454,7 @@ then
 
   else
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca --memory "$MAX_MEM_USAGE" --threads 8 --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca.eigenval "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenval
@@ -462,7 +462,7 @@ then
     perl "${PERL_PROGRAM_HOME}"/ps_make_normalized_pcs.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca.eigenvec "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca.eigenval "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca_norm_pcs.txt
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_pca_norm_pcs.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/normalized_plink_pca.txt
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id
 
@@ -543,7 +543,7 @@ else
   if [ ${CLUSTERING_FLAG} -eq 1 ]
   then
     GROUPS_NO=$CLUSTER_K
-    "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
+    "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
     perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl ${CLUSTERING_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list  "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.cluster1 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster1
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.cluster2 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster2
@@ -553,10 +553,10 @@ else
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list ]
     then
       GROUPS_NO=$( awk '{print $3}' "${INPUT_DIR}/${OUTPUT_PREFIX}_groups_for_sort.list" | sort | uniq | wc -l )
-      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K "$GROUPS_NO" --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
+      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K "$GROUPS_NO" --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
     else
       GROUPS_NO=2
-      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
+      "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
       CLUSTERING_FLAG=1
       perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl ${CLUSTERING_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list  "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list
       cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.cluster1 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster1
@@ -576,7 +576,7 @@ else
     perl "${PERL_PROGRAM_HOME}"/ps_chr_no_count.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_used_fstplot.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_notused_fstplot.txt
     CHR_CONTIGS_NO=$( wc -l <"${SHINY_APP_DIR}/${OUTPUT_PREFIX}/data/chr_used_fstplot.txt" )
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --fst CATEGORY 'report-variants' --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads 8 --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --fst CATEGORY 'report-variants' --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst.fst.summary "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst.fst.summary
     perl "${PERL_PROGRAM_HOME}"/ps_fst_summary_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst.fst.summary "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.fst.summary
 
@@ -597,13 +597,13 @@ else
       done
     fi
   else
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --fst CATEGORY --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads 8 --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --fst CATEGORY --pheno "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst.fst.summary "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst.fst.summary
     perl "${PERL_PROGRAM_HOME}"/ps_fst_summary_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst.fst.summary "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.fst.summary
   fi
 
-  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --distance square ibs --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs
-  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --make-king square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king
+  "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --distance square ibs --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs
+  "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --make-king square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king
 
   perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_kinship.king.id 
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_distance_ibs.mibs
@@ -641,7 +641,7 @@ else
   if [ "${IMPUTATION_FLAG}" -eq 1 ]
   then
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads 8 --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca.eigenval "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenval
@@ -649,7 +649,7 @@ else
     perl "${PERL_PROGRAM_HOME}"/ps_make_normalized_pcs.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca.eigenvec "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca.eigenval "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca_norm_pcs.txt
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca_norm_pcs.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/normalized_plink_pca.txt
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel meanimpute square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel meanimpute square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel
@@ -682,7 +682,7 @@ else
 
   else
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca --memory "$MAX_MEM_USAGE" --threads 8 --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca.eigenval "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenval
@@ -690,7 +690,7 @@ else
     perl "${PERL_PROGRAM_HOME}"/ps_make_normalized_pcs.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca.eigenvec "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca.eigenval "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca_norm_pcs.txt
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_pca_norm_pcs.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/normalized_plink_pca.txt
 
-    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel square --memory "$MAX_MEM_USAGE" --threads 8 --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm
+    "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm
 
     perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id 
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel
