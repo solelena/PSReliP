@@ -44,16 +44,16 @@ echo "Start time: `date '+%Y/%m/%d %H:%M:%S'` Start the pre-analysis step"
 
 if [ "${VCF_FILE_NAME##*.}" = "bcf" ]
 then
-  "${PLINK2_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --min-alleles 2 --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [[ $VCF_FILE_NAME =~ \bcf.gz$ ]]
 then
-  "${PLINK2_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_HOME}"/plink2 --bcf "${VCF_FILE_NAME}" --allow-extra-chr --min-alleles 2 --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [ "${VCF_FILE_NAME##*.}" = "vcf" ]
 then
-  "${PLINK2_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --min-alleles 2 --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 elif [[ $VCF_FILE_NAME =~ \vcf.gz$ ]]
 then
-  "${PLINK2_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
+  "${PLINK2_HOME}"/plink2 --vcf "${VCF_FILE_NAME}" --allow-extra-chr --min-alleles 2 --max-alleles 2 --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BED_INPUT_FILE}"_temp
 else
     echo "Please specify the valid VCF file in configuration file."
 fi
