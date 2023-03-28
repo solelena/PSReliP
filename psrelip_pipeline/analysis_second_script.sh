@@ -54,7 +54,7 @@ SNP_NO_AF=0
 SNP_NO=0
 CHR_CONTIGS_NO=0
 MESSAGE_FLAG=0
-FST_PLOT_MESSAGE='no' 
+FST_PLOT_MESSAGE='no'
 EIGENVAL_SUM=0
 
 INPUT_DIR="${WD}"/input_files/"${OUTPUT_PREFIX}"
@@ -74,7 +74,7 @@ else
   mkdir -p "${INPUT_DIR}"
 fi
 
-if [ "${LD_PRUNING_FLAG}" -eq 1 ]
+if [ ${LD_PRUNING_FLAG} -eq 1 ]
 then
   if [ -d "${PRUNED_SET_DIR}" ]
   then
@@ -141,7 +141,7 @@ fi
 TIME_START=`date +%s`
 echo "Start time: `date '+%Y/%m/%d %H:%M:%S'` Start the analysis stage"
 
-if [ "${EXTRA_CHR_FLAG}" -eq 0 ] && [ "${NUMBER_OF_CHROMOSOMES}" -eq 0 ]
+if [ ${EXTRA_CHR_FLAG} -eq 0 ] && [ ${NUMBER_OF_CHROMOSOMES} -eq 0 ]
 then
   NUMBER_OF_CHROMOSOMES=99
   echo "The number of chromosomes (NUMBER_OF_CHROMOSOMES parameter) was set to invalid value '0'. The variants of all chromosomes from the VCF file are used."
@@ -149,7 +149,7 @@ then
   MESSAGE_FLAG=1
 fi
 
-if [ "${CLUSTERING_FLAG}" -eq 1 ] && [ "${CLUSTER_K}" -lt 2 ]
+if [ ${CLUSTERING_FLAG} -eq 1 ] && [ ${CLUSTER_K} -lt 2 ]
 then
   CLUSTER_K=2
   echo "The number of clusters (CLUSTER_K parameter) was set to invalid value (less than 2). The value for this parameter was reset to '2'."
@@ -159,7 +159,7 @@ fi
 
 RANGE_OF_CHROMOSOMES=1-${NUMBER_OF_CHROMOSOMES}
 
-if [ "${SAM_SELECT_FLAG}" -eq 1 ]
+if [ ${SAM_SELECT_FLAG} -eq 1 ]
 then
   perl "${PERL_PROGRAM_HOME}"/ps_make_samples_ids.pl "${SAMPLES_ID_FOR_ANA}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_samples.list
   if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_samples.list ]
@@ -173,7 +173,7 @@ then
   fi
 fi
   
-if [ "${SAM_SELECT_FLAG}" -eq 1 ]
+if [ ${SAM_SELECT_FLAG} -eq 1 ]
 then
   "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --keep "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_samples.list --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv
   "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv --allow-extra-chr --sample-counts --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_sc
@@ -193,7 +193,7 @@ else
   "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --make-just-fam --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv_b
 fi
 
-if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 0 ]
+if [ ${SAM_ANOTHER_NAME_FLAG} -eq 0 ]
 then
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv_b.fam "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_samples_info_orig.fam
 else
@@ -212,18 +212,18 @@ else
   fi
 fi
 
-if [ "${SAM_SELECT_FLAG}" -eq 1 ]
+if [ ${SAM_SELECT_FLAG} -eq 1 ]
 then
-  if [ "${SNP_ONLY_FLAG}" -eq 1 ]
+  if [ ${SNP_ONLY_FLAG} -eq 1 ]
   then
-    if [ "${EXTRA_CHR_FLAG}" -eq 1 ]
+    if [ ${EXTRA_CHR_FLAG} -eq 1 ]
     then
       "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv --allow-extra-chr --snps-only --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     else
       "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv --allow-extra-chr --chr ${RANGE_OF_CHROMOSOMES} --snps-only --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     fi
   else
-    if [ "${EXTRA_CHR_FLAG}" -eq 1 ]
+    if [ ${EXTRA_CHR_FLAG} -eq 1 ]
     then
       "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_sv --allow-extra-chr --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     else
@@ -231,16 +231,16 @@ then
     fi 
   fi
 else
-  if [ "${SNP_ONLY_FLAG}" -eq 1 ]
+  if [ ${SNP_ONLY_FLAG} -eq 1 ]
   then
-    if [ "${EXTRA_CHR_FLAG}" -eq 1 ]
+    if [ ${EXTRA_CHR_FLAG} -eq 1 ]
     then
       "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --snps-only --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     else
       "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --chr ${RANGE_OF_CHROMOSOMES} --snps-only --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     fi
   else
-    if [ "${EXTRA_CHR_FLAG}" -eq 1 ]
+    if [ ${EXTRA_CHR_FLAG} -eq 1 ]
     then
       "${PLINK2_HOME}"/plink2 --pfile "${BED_INPUT_FILE}" --allow-extra-chr --mind "$MIND_VAL" --geno "$GENO_VAL" --maf "$MAF_VAL" --make-pgen --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b
     else
@@ -264,15 +264,15 @@ fi
 
 "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --make-bed --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b
 
-if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 0 ]
+if [ ${SAM_ANOTHER_NAME_FLAG} -eq 0 ]
 then
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_samples_info.fam
 else
-  perl "${PERL_PROGRAM_HOME}"/ps_make_samples_list.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${SAMPLES_ID_FOR_ANA}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
+  perl "${PERL_PROGRAM_HOME}"/ps_make_samples_list.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${SAMPLES_ID_FOR_ANA}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
 
-  if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	 ]
+  if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list ]
   then
-    cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/smp.list	
+    cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/smp.list
     echo "List of names for samples was created."
   else
     SAM_ANOTHER_NAME_FLAG=0
@@ -283,7 +283,7 @@ else
   fi
 fi
 
-if [ "${LD_PRUNING_FLAG}" -eq 1 ]
+if [ ${LD_PRUNING_FLAG} -eq 1 ]
 then
 
   if [ "${LD_WINDOW_SIZE_UNITS}" = "kb" ]
@@ -306,18 +306,18 @@ then
    
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.bim
   SAMPLES_NO=$( wc -l <"${INPUT_DIR}/${OUTPUT_PREFIX}_ld${LD_THRESHOLD}_pl_b.fam" )
-  SNP_NO=$( grep -vc '^#' "${INPUT_DIR}/${OUTPUT_PREFIX}_ld${LD_THRESHOLD}_pl2_b.pvar" )  
+  SNP_NO=$( grep -vc '^#' "${INPUT_DIR}/${OUTPUT_PREFIX}_ld${LD_THRESHOLD}_pl2_b.pvar" )
   
   "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --het 'cols=+het,+het' --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het
-  perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het.het "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_het.het 
+  perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_het.het "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_het.het
   "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --ibc --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc
   cp "${BS_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ibc.ibc "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_ibc.ibc
 
-  if [ "${CLUSTERING_FLAG}" -eq 1 ]
+  if [ ${CLUSTERING_FLAG} -eq 1 ]
   then
-    GROUPS_NO=$CLUSTER_K 
+    GROUPS_NO=$CLUSTER_K
     "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"
-    perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl "${CLUSTERING_FLAG}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list 
+    perl "${PERL_PROGRAM_HOME}"/ps_make_groups_list.pl "${CLUSTERING_FLAG}" "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.fam "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_orig.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster1 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster1
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster2 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster2
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".cluster3 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_cluster.cluster3
@@ -344,7 +344,7 @@ then
   cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}".mds "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_mds_plot.mds
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_names_numbers.list
 
-  if [ "${GROUPS_NO}" -le 5 ]
+  if [ ${GROUPS_NO} -le 5 ]
   then
     perl "${PERL_PROGRAM_HOME}"/ps_chr_no_count.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_used_fstplot.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_notused_fstplot.txt
     CHR_CONTIGS_NO=$( wc -l <"${SHINY_APP_DIR}/${OUTPUT_PREFIX}/data/chr_used_fstplot.txt" )
@@ -362,7 +362,7 @@ then
       perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_fst."${FST_VAR_FILES_ARRAY[$i]}" "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst."${FST_VAR_FILES_ARRAY[$i]}"
     done
 
-    if [ "${CHR_CONTIGS_NO}" -gt 0 ]
+    if [ ${CHR_CONTIGS_NO} -gt 0 ]
     then
       for (( j = 0; j < $FST_FILES_ARRAY_LEN; j++ ))
       do
@@ -382,17 +382,17 @@ then
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_distance_ibs.mibs.id
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_kinship.king
 
-  if [ "${SAMPLES_NO}" -le 400 ]
+  if [ ${SAMPLES_NO} -le 400 ]
   then
 
-    if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+    if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
     then
-      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.mibs.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.king.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.mibs.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.king.smp.list	
+      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.mibs.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.king.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.mibs.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.king.smp.list
     else
       perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ld"${LD_THRESHOLD}"_ibs_pl ${SAM_ANOTHER_NAME_FLAG}
       perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_king_pl ${SAM_ANOTHER_NAME_FLAG}
@@ -410,11 +410,11 @@ then
 
   fi
 
-  if [ "${IMPUTATION_FLAG}" -eq 1 ]
+  if [ ${IMPUTATION_FLAG} -eq 1 ]
   then
     "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca
 
-    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec 
+    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenvec "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenvec
     cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenval "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_pca.eigenval
    
     perl "${PERL_PROGRAM_HOME}"/ps_make_normalized_pcs.pl "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenvec "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca.eigenval "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_im_pca_norm_pcs.txt
@@ -422,25 +422,25 @@ then
 
     "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_ld"${LD_THRESHOLD}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel meanimpute square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm
     
-    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id 
+    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id
 
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel
 
-    awk '{print $NR}' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel > "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt 
+    awk '{print $NR}' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel > "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     EIGENVAL_SUM=$(perl -lne '$x += $_; END { print $x; }' < "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt)
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
     then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     fi
 
-    if [ "${SAMPLES_NO}" -le 400 ]
+    if [ ${SAMPLES_NO} -le 400 ]
     then
 
-      if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+      if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
       then
-        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list	
+        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list
       else
         perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG}
         cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.id
@@ -475,14 +475,14 @@ then
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     fi
 
-    if [ "${SAMPLES_NO}" -le 400 ]
+    if [ ${SAMPLES_NO} -le 400 ]
     then
 
-      if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+      if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
       then
-        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list	
+        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list
       else
         perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl ${SAM_ANOTHER_NAME_FLAG}
         cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_ld"${LD_THRESHOLD}"_grm_pl.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.id
@@ -495,11 +495,11 @@ then
 
   fi
 
-  if [ "${GROUPS_NO}" -gt 5 ]
+  if [ ${GROUPS_NO} -gt 5 ]
   then
       FST_PLOT_MESSAGE='gr_no'
   else
-    if [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       FST_PLOT_MESSAGE='chr_no'
     fi
@@ -508,15 +508,15 @@ then
   perl "${PERL_PROGRAM_HOME}"/ps_save_parameters.pl "$SNP_ONLY_FLAG" "$GENO_VAL" "$MAF_VAL" "$MIND_VAL" "$IMPUTATION_FLAG" "$LD_PRUNING_FLAG" "$LD_WINDOW_SIZE" "$LD_WINDOW_SIZE_UNITS" "$LD_STEP_SIZE" "$LD_THRESHOLD" $CLUSTERING_FLAG $GROUPS_NO $SAM_ANOTHER_NAME_FLAG "$SAMPLES_NO" "$SNP_NO_ALL" "$SNP_NO_AF" "$SNP_NO" "$EIGENVAL_SUM" "$PLOTLY_IMAGE_FORMAT" $MESSAGE_FLAG $FST_PLOT_MESSAGE "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_parameters_list.txt
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_parameters_list.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/parameters_list.txt
   
-  if [ "${MESSAGE_FLAG}" -eq 1 ]
+  if [ ${MESSAGE_FLAG} -eq 1 ]
   then
     cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_message.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/message.txt
   fi
 
-  if [ "${SAMPLES_NO}" -le 400 ]
+  if [ ${SAMPLES_NO} -le 400 ]
   then
 
-    if [ "${GROUPS_NO}" -gt 5 ] || [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${GROUPS_NO} -gt 5 ] || [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       cp "${SHINY_PROGRAM_HOME}"/without_fst_plot/app.R "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/
     else
@@ -525,7 +525,7 @@ then
 
   else
      
-    if [ "${GROUPS_NO}" -gt 5 ] || [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${GROUPS_NO} -gt 5 ] || [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       cp "${SHINY_PROGRAM_HOME}"/without_fst_plot_without_heatmap/app.R "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/
     else
@@ -540,7 +540,7 @@ else
   SAMPLES_NO=$( wc -l <"${INPUT_DIR}/${OUTPUT_PREFIX}_pl_b.fam" )
   SNP_NO=$( grep -vc '^#' "${INPUT_DIR}/${OUTPUT_PREFIX}_pl2_b.pvar" )
 
-  if [ "${CLUSTERING_FLAG}" -eq 1 ]
+  if [ ${CLUSTERING_FLAG} -eq 1 ]
   then
     GROUPS_NO=$CLUSTER_K
     "${PLINK_HOME}"/plink --bfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b --allow-extra-chr --cluster --K $GROUPS_NO --mds-plot 10 --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl
@@ -570,8 +570,8 @@ else
 
   cp "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl.mds "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_mds_plot.mds
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_names_numbers.list "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/groups_names_numbers.list
- 
-  if [ "${GROUPS_NO}" -le 5 ]
+
+  if [ ${GROUPS_NO} -le 5 ]
   then
     perl "${PERL_PROGRAM_HOME}"/ps_chr_no_count.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_b.bim "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_used_fstplot.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/chr_notused_fstplot.txt
     CHR_CONTIGS_NO=$( wc -l <"${SHINY_APP_DIR}/${OUTPUT_PREFIX}/data/chr_used_fstplot.txt" )
@@ -589,7 +589,7 @@ else
       perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${FST_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_fst."${FST_VAR_FILES_ARRAY[$i]}" "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_fst."${FST_VAR_FILES_ARRAY[$i]}"
     done
 
-    if [ "${CHR_CONTIGS_NO}" -gt 0 ]
+    if [ ${CHR_CONTIGS_NO} -gt 0 ]
     then
       for (( j = 0; j < $FST_FILES_ARRAY_LEN; j++ ))
       do
@@ -610,17 +610,17 @@ else
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_distance_ibs.mibs.id
   cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_kinship.king
 
-  if [ "${SAMPLES_NO}" -le 400 ]
+  if [ ${SAMPLES_NO} -le 400 ]
   then
 
-    if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+    if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
     then
-      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.mibs.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.king.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.mibs.smp.list	
-      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.king.smp.list	
+      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+      perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.mibs.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.king.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.mibs.smp.list
+      cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.king.smp.list
     else
       perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs.mibs.id ${GROUPS_NO} 'ibs' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl ${SAM_ANOTHER_NAME_FLAG}
       perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king.king.id ${GROUPS_NO} 'king' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl ${SAM_ANOTHER_NAME_FLAG}
@@ -635,10 +635,10 @@ else
 
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl_ibs_pl.orig_sorted "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.mibs
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_king_pl.orig_sorted "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.king
- 
-  fi
 
-  if [ "${IMPUTATION_FLAG}" -eq 1 ]
+  fi
+  
+  if [ ${IMPUTATION_FLAG} -eq 1 ]
   then
 
     "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --pca meanimpute --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${PSA_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_im_pca
@@ -661,14 +661,14 @@ else
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     fi
 
-    if [ "${SAMPLES_NO}" -le 400 ]
+    if [ ${SAMPLES_NO} -le 400 ]
     then
 
-      if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+      if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
       then
-        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list	
+        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list
       else
         perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG}
         cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.id
@@ -692,10 +692,10 @@ else
 
     "${PLINK2_HOME}"/plink2 --pfile "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_b --allow-extra-chr --read-freq "${ALLELE_FREQ_COUNTS_FILE}" --make-rel square --memory "$MAX_MEM_USAGE" --threads "$MAX_THREADS" --out "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm
 
-    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id 
+    perl "${PERL_PROGRAM_HOME}"/ps_columns_names_edit.pl "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel.id
     cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/plink_grm.rel
 
-    awk '{print $NR}' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel > "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt 
+    awk '{print $NR}' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel > "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     EIGENVAL_SUM=$(perl -lne '$x += $_; END { print $x; }' < "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt)
 
     if [ -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt ]
@@ -703,14 +703,14 @@ else
       rm -f "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_grm_diagonal.txt
     fi
 
-    if [ "${SAMPLES_NO}" -le 400 ]
+    if [ ${SAMPLES_NO} -le 400 ]
     then
 
-      if [ "${SAM_ANOTHER_NAME_FLAG}" -eq 1 ]
+      if [ ${SAM_ANOTHER_NAME_FLAG} -eq 1 ]
       then
-        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list	
-        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list	
+        perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG} "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.smp.list
+        cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl_smp_os.list	 "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/os_results_data.rel.smp.list
       else
         perl "${PERL_PROGRAM_HOME}"/ps_matrix_edit.pl "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_groups_for_sort.list "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm.rel.id ${GROUPS_NO} 'rel' "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl ${SAM_ANOTHER_NAME_FLAG}
         cp "${KSH_OUTPUT_DIR}"/"${OUTPUT_PREFIX}"_pl2_grm_pl.id "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/results_data.rel.id
@@ -724,11 +724,11 @@ else
 
   fi
 
-  if [ "${GROUPS_NO}" -gt 5 ]
+  if [ ${GROUPS_NO} -gt 5 ]
   then
       FST_PLOT_MESSAGE='gr_no'
   else
-    if [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       FST_PLOT_MESSAGE='chr_no'
     fi
@@ -737,15 +737,15 @@ else
   perl "${PERL_PROGRAM_HOME}"/ps_save_parameters.pl "$SNP_ONLY_FLAG" "$GENO_VAL" "$MAF_VAL" "$MIND_VAL" "$IMPUTATION_FLAG" "$LD_PRUNING_FLAG" "$LD_WINDOW_SIZE" "$LD_WINDOW_SIZE_UNITS" "$LD_STEP_SIZE" "$LD_THRESHOLD" $CLUSTERING_FLAG $GROUPS_NO $SAM_ANOTHER_NAME_FLAG "$SAMPLES_NO" "$SNP_NO_ALL" "$SNP_NO_AF" "$SNP_NO" "$EIGENVAL_SUM" "$PLOTLY_IMAGE_FORMAT" $MESSAGE_FLAG $FST_PLOT_MESSAGE "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_parameters_list.txt
   cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_parameters_list.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/parameters_list.txt
 
-  if [ "${MESSAGE_FLAG}" -eq 1 ]
+  if [ ${MESSAGE_FLAG} -eq 1 ]
   then
     cp "${INPUT_DIR}"/"${OUTPUT_PREFIX}"_message.txt "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/data/message.txt
   fi
 
-  if [ "${SAMPLES_NO}" -le 400 ]
+  if [ ${SAMPLES_NO} -le 400 ]
   then
 
-    if [ "${GROUPS_NO}" -gt 5 ] || [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${GROUPS_NO} -gt 5 ] || [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       cp "${SHINY_PROGRAM_HOME}"/without_fst_plot/app.R "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/
     else
@@ -754,7 +754,7 @@ else
 
   else
 
-    if [ "${GROUPS_NO}" -gt 5 ] || [ "${CHR_CONTIGS_NO}" -eq 0 ]
+    if [ ${GROUPS_NO} -gt 5 ] || [ ${CHR_CONTIGS_NO} -eq 0 ]
     then
       cp "${SHINY_PROGRAM_HOME}"/without_fst_plot_without_heatmap/app.R "${SHINY_APP_DIR}"/"${OUTPUT_PREFIX}"/
     else
