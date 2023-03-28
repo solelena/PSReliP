@@ -45,8 +45,8 @@
 | SAM_ANOTHER_NAME_FLAG | Setting sample names | Set to 0 to identify the samples by IDs used in the genotype input file, and set to 1 to use the sample names other than sample IDs. | integer 0 (IDs from the genotype input file) or 1 (sample names other than sample IDs) | default value: 0 | optional |
 | PLOTLY_IMAGE_FORMAT | Types of image file formats | Set the image file format to export the plot as a static image. | string ( one of the following: png, jpeg, webp, svg, pdf) | default value: "jpeg" | required |
 | OUTPUT_PREFIX | Shiny application name | Specify the Shiny app directory name: this name will be part of the URL of the Shiny application. | not empty string | default value: "app_name" | required |
-| MAX_MEM_USAGE | System resource usage (PLINK's --memory flag) | Set size, in MB, of initial workspace malloc attempt.<sup>c</sup> 32-bit PLINK limits workspace size to roughly 2 GB.<sup>d</sup> | non negative integer | default value: 2000 | required |
-| MAX_THREADS | System resource usage (PLINK's  --threads flag) | Set maximum number of compute threads.<sup>c</sup> (depends on your machine) | non negative integer | default value: 8 | required |
+| MAX_MEM_USAGE | System resource usage (PLINK's --memory flag) | Set size, in MB, of initial workspace malloc attempt.<sup>c</sup> 32-bit PLINK limits workspace size to roughly 2 GB.<sup>d</sup> | non negative integer | default value: 8000 | required |
+| MAX_THREADS | System resource usage (PLINK's  --threads flag) | Set maximum number of compute threads.<sup>c</sup> (depends on your machine) | non negative integer | default value: 2 | required |
 
 **Note:** <sup>a</sup> represents the version of the PLINK executable used in our pipeline; <sup>b</sup> denotes a quotation from the [PLINK 2.0 User Manual](https://www.cog-genomics.org/plink/2.0/); <sup>c</sup> denotes a quotation from the PLINK 2.0 Command-line help; <sup>d</sup> denotes a quotation from the [PLINK 1.9 User Manual](https://www.cog-genomics.org/plink/1.9/).
 ### Implementation of the PSReliP pipeline
